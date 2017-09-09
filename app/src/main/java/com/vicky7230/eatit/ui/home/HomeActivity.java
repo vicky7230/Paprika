@@ -1,0 +1,84 @@
+package com.vicky7230.eatit.ui.home;
+
+import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
+
+import com.vicky7230.eatit.R;
+import com.vicky7230.eatit.ui.base.BaseActivity;
+
+import javax.inject.Inject;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class HomeActivity extends BaseActivity implements HomeMvpView {
+
+    @Inject
+    HomeMvpPresenter<HomeMvpView> presenter;
+    @Inject
+    ViewPagerAdapter viewPagerAdapter;
+
+    @BindView(R.id.view_pager)
+    ViewPager viewPager;
+    @BindView(R.id.tab_layout)
+    TabLayout tabLayout;
+
+    private final int[] TAB_ICONS_UNSELECTED = {
+            R.drawable.ic_recipes_green,
+            R.drawable.ic_camera_green,
+            R.drawable.ic_likes_green,
+            R.drawable.ic_settings_green
+    };
+    private final int[] TAB_ICONS_SELECTED = {
+            R.drawable.ic_recipes_white,
+            R.drawable.ic_camera_white,
+            R.drawable.ic_likes_white,
+            R.drawable.ic_settings_white
+    };
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        getActivityComponent().inject(this);
+        ButterKnife.bind(this);
+        init();
+    }
+
+    private void init() {
+
+        viewPager.setOffscreenPageLimit(4);
+        viewPager.setAdapter(viewPagerAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                for (int i = 0; i < tabLayout.getTabCount(); ++i)
+
+                    tabLayout.getTabAt(i).setIcon(
+                            i != position ?
+                                    TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
+                    );
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+        tabLayout.setupWithViewPager(viewPager);
+        for (int i = 0; i < tabLayout.getTabCount(); ++i)
+
+            tabLayout.getTabAt(i).setIcon(
+                    i != viewPager.getCurrentItem() ?
+                            TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
+            );
+    }
+
+}
