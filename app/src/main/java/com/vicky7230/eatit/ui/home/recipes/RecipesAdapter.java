@@ -192,7 +192,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                     recipe.setLiked(true);
                 }
             });
-
         }
 
         @Override

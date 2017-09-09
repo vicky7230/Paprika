@@ -18,7 +18,7 @@
         <ProgressBar
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"/>
+            android:layout_height="35dp"/>
 
         <TextView
             fontPath="fonts/OpenSans-SemiBold.ttf"
@@ -27,25 +27,25 @@
             android:layout_marginLeft="10dp"
             android:text="@string/loading"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="18sp"
-            tools:ignore="RtlHardcoded"/>
+            android:textSize="16sp"
+            tools:ignore="MissingPrefix,RtlHardcoded"/>
     </LinearLayout>
 
     <com.joanzapata.iconify.widget.IconTextView
         android:id="@+id/retry_button"
         fontPath="fonts/OpenSans-SemiBold.ttf"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="center"
         android:background="@drawable/curved_black_border"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
         android:text="{md-error 25sp}    RETRY"
         android:textColor="@android:color/black"
         android:textSize="16sp"
