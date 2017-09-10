@@ -1,6 +1,8 @@
 package com.vicky7230.eatit.ui.home.recipes;
 
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +12,10 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
@@ -142,6 +148,21 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     }
 
     @Override
+    public void showIngredients(List<String> ingredients) {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.ingredients_list_view, null, false);
+        ((TextView) view.findViewById(R.id.title)).setText("Ingredients");
+        ListView listView = (ListView) view.findViewById(R.id.ingredients_list);
+        listView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.ingredients_list_item, ingredients));
+
+        Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(view);
+        dialog.show();
+    }
+
+    @Override
     public void onDestroyView() {
         presenter.onDetach();
         super.onDestroyView();
@@ -155,6 +176,20 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     @Override
     public void onRetryClick() {
         presenter.fetchRecipes();
+    }
+
+    @Override
+    public void onShareClick(String sourceUrl) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, sourceUrl);
+        sendIntent.setType("text/plain");
+        startActivity(Intent.createChooser(sendIntent, "Share using..."));
+    }
+
+    @Override
+    public void onIngredientsClick(String recipeId) {
+        presenter.getSingleRecipe(recipeId);
     }
 
     @OnClick(R.id.fab)

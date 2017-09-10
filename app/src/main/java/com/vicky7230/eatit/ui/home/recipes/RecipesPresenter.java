@@ -4,6 +4,7 @@ import com.vicky7230.eatit.data.DataManager;
 import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
+import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
 import com.vicky7230.eatit.rxBus.RxBus;
 import com.vicky7230.eatit.rxBus.events.LikesUpdatedEvent;
 import com.vicky7230.eatit.ui.base.BasePresenter;
@@ -44,11 +45,13 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                 .map(new Function<Recipes, Recipes>() {
                     @Override
                     public Recipes apply(@NonNull Recipes recipes) throws Exception {
-                        for (Recipe recipe : recipes.getRecipes()) {
-                            if (getDataManager().checkIfRecipeIsLiked(recipe)) {
-                                recipe.setLiked(true);
-                            } else {
-                                recipe.setLiked(false);
+                        if (recipes != null && recipes.getRecipes() != null) {
+                            for (Recipe recipe : recipes.getRecipes()) {
+                                if (getDataManager().checkIfRecipeIsLiked(recipe)) {
+                                    recipe.setLiked(true);
+                                } else {
+                                    recipe.setLiked(false);
+                                }
                             }
                         }
                         return recipes;
@@ -123,6 +126,46 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        getMvpView().showError(throwable.getMessage());
+                        Timber.e(throwable);
+                    }
+                }));
+    }
+
+    @Override
+    public void getSingleRecipe(String recipeId) {
+
+        getMvpView().showLoading();
+        getCompositeDisposable().add(getDataManager().getRecipe(recipeId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .map(new Function<SingleRecipe, SingleRecipe>() {
+                    @Override
+                    public SingleRecipe apply(@NonNull SingleRecipe singleRecipe) throws Exception {
+                        if (singleRecipe != null && singleRecipe.getRecipe() != null) {
+                            if (singleRecipe.getRecipe().getIngredients() != null) {
+                                for (int i = 0; i < singleRecipe.getRecipe().getIngredients().size(); ++i) {
+                                    singleRecipe.getRecipe().getIngredients().set(i, singleRecipe.getRecipe().getIngredients().get(i).trim());
+                                }
+                            }
+                        }
+                        return singleRecipe;
+                    }
+                })
+                .subscribe(new Consumer<SingleRecipe>() {
+                    @Override
+                    public void accept(SingleRecipe singleRecipe) throws Exception {
+                        getMvpView().hideLoading();
+                        if (singleRecipe != null && singleRecipe.getRecipe() != null) {
+                            if (singleRecipe.getRecipe().getIngredients() != null) {
+                                getMvpView().showIngredients(singleRecipe.getRecipe().getIngredients());
+                            }
+                        }
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        getMvpView().hideLoading();
                         getMvpView().showError(throwable.getMessage());
                         Timber.e(throwable);
                     }

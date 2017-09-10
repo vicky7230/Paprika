@@ -1,6 +1,7 @@
 package com.vicky7230.eatit.ui.home.recipes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
@@ -30,9 +31,6 @@ import butterknife.ButterKnife;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-/**
- * Created by vicky on 25/6/17.
- */
 
 public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -46,6 +44,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         void onLikeRecipeClick(int position);
 
         void onRetryClick();
+
+        void onShareClick(String sourceUrl);
+
+        void onIngredientsClick(String recipeId);
     }
 
     private int tapCount = 0;
@@ -136,6 +138,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         ImageView imageViewLike;
         @BindView(R.id.like_button)
         ImageView likeButton;
+        @BindView(R.id.share_button)
+        ImageView shareButton;
+        @BindView(R.id.ingredients_button)
+        ImageView ingredientsButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -190,6 +196,20 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                     notifyItemChanged(position, ACTION_LIKE_BUTTON_CLICKED);
                     callback.onLikeRecipeClick(position);
                     recipe.setLiked(true);
+                }
+            });
+
+            shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callback.onShareClick(recipe.getSourceUrl());
+                }
+            });
+
+            ingredientsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    callback.onIngredientsClick(recipe.getRecipeId());
                 }
             });
         }

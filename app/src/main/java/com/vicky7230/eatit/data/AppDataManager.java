@@ -7,6 +7,7 @@ import com.vicky7230.eatit.data.network.model.imagga.content.Content;
 import com.vicky7230.eatit.data.network.model.imagga.tag.Tags;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
+import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
 
 import java.util.List;
 
@@ -17,9 +18,6 @@ import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-/**
- * Created by vicky on 25/6/17.
- */
 @Singleton
 public class AppDataManager implements DataManager {
 
@@ -34,8 +32,12 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Observable<Recipes> getRecipes(String page) {
-
         return apiHelper.getRecipes(page);
+    }
+
+    @Override
+    public Observable<SingleRecipe> getRecipe(String rId) {
+        return apiHelper.getRecipe(rId);
     }
 
     @Override

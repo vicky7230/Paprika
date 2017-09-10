@@ -9,9 +9,11 @@ import java.util.List;
  * Created by agrim on 3/7/17.
  */
 
-public interface RecipesMvpView extends MvpView{
+public interface RecipesMvpView extends MvpView {
 
     void updateRecipeList(List<Recipe> resultList);
 
     void showErrorInRecyclerView();
+
+    void showIngredients(List<String> ingredients);
 }

@@ -14,4 +14,5 @@
     <string name="camera">Camera</string>
     <string name="camera_hint">Don\'t know what to cook? Take a picture of the item and see the magic.</string>
     <string name="retry">RETRY</string>
+    <string name="ingredients">Ingredients</string>
 </resources>

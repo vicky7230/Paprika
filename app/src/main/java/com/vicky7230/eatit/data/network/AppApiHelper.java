@@ -4,6 +4,7 @@ import com.vicky7230.eatit.data.Config;
 import com.vicky7230.eatit.data.network.model.imagga.content.Content;
 import com.vicky7230.eatit.data.network.model.imagga.tag.Tags;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
+import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,6 +37,11 @@ public class AppApiHelper implements ApiHelper {
             return recipeService.getRecipes(Config.RECIPES_API_KEY, page, "r");
         else
             return recipeService.getRecipes(Config.RECIPES_API_KEY_2, page, "r");
+    }
+
+    @Override
+    public Observable<SingleRecipe> getRecipe(String rId) {
+        return recipeService.getRecipe(Config.RECIPES_API_KEY, rId);
     }
 
     @Override

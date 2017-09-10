@@ -19,4 +19,6 @@ public interface RecipesMvpPresenter<V extends RecipesMvpView> extends MvpPresen
     void fetchRecipes();
 
     void likeTheRecipe(Recipe recipe);
+
+    void getSingleRecipe(String recipeId);
 }

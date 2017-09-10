@@ -1,5 +1,6 @@
 package com.vicky7230.eatit.data.network;
 
+import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
 
 import io.reactivex.Observable;
@@ -17,6 +18,12 @@ public interface RecipeService {
             @Query("key") String key,
             @Query("page") String page,
             @Query("sort") String sort
+    );
+
+    @GET("get")
+    Observable<SingleRecipe> getRecipe(
+            @Query("key") String key,
+            @Query("rId") String rId
     );
 
 }

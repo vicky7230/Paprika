@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,7 +20,7 @@
                 android:id="@+id/recipe_image"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription" />
 
             <ImageView
                 android:id="@+id/image_view_like"
@@ -30,7 +29,7 @@
                 android:layout_gravity="center"
                 android:scaleType="center"
                 android:src="@drawable/ic_heart_white"
-                android:visibility="invisible"/>
+                android:visibility="invisible" />
 
         </FrameLayout>
 
@@ -47,44 +46,52 @@
                 android:layout_gravity="center_vertical"
                 android:padding="10dp"
                 android:textColor="@android:color/black"
-                tools:ignore="MissingPrefix"/>
+                tools:ignore="MissingPrefix" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:background="@android:color/black"/>
+                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:weightSum="3">
 
                 <ImageView
                     android:id="@+id/like_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="5dp"
-                    android:paddingTop="10dp"
-                    android:src="@drawable/ic_favorite_border"/>
+                    android:padding="10dp"
+                    android:src="@drawable/ic_favorite_border" />
 
                 <ImageView
                     android:id="@+id/share_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:focusable="true"
-                    android:paddingBottom="10dp"
-                    android:paddingLeft="5dp"
-                    android:paddingRight="10dp"
-                    android:paddingTop="10dp"
-                    android:src="@drawable/ic_action_share"/>
+                    android:padding="10dp"
+                    android:src="@drawable/ic_action_share" />
+
+                <ImageView
+                    android:id="@+id/ingredients_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_ingredients" />
 
             </LinearLayout>
         </LinearLayout>
