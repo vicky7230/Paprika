@@ -51,7 +51,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
     private void displayMessage(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
+        //snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         snackbar.show();
@@ -60,7 +60,7 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
     private void displayError(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
-        snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRedError));
+        //snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRedError));
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
         snackbar.show();

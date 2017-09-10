@@ -3,6 +3,7 @@ package com.vicky7230.eatit.ui.home.likes;
 import android.net.Uri;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.util.DiffUtil;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.ui.base.BaseViewHolder;
 import com.vicky7230.eatit.utils.GlideApp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,8 +43,13 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public void addItems(List<LikedRecipe> likedRecipeList) {
 
+        List<LikedRecipe> newLikedRecipeList = new ArrayList<>();
+        newLikedRecipeList.addAll(this.likedRecipeList);
+        newLikedRecipeList.addAll(likedRecipeList);
+
+        DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new LikedRecipeDiffUtilCallback(this.likedRecipeList, newLikedRecipeList));
         this.likedRecipeList.addAll(likedRecipeList);
-        notifyDataSetChanged();
+        diffResult.dispatchUpdatesTo(this);
     }
 
     public void removeItem(int position) {
