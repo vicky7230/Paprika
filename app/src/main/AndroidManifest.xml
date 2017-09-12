@@ -30,8 +30,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.base.BaseActivity"/>
-        <activity android:name=".ui.search.SearchActivity">
-        </activity>
+        <activity android:name=".ui.search.SearchActivity"/>
+        <provider
+            android:name=".utils.GenericFileProvider"
+            android:authorities="com.vicky7230.eatit.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths"/>
+        </provider>
     </application>
 
 </manifest>

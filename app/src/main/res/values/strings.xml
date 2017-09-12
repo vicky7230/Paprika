@@ -4,7 +4,6 @@
     <string name="search">Search</string>
     <string name="left_overs">Left Overs</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="share">Share</string>
     <string name="favourite">Favourite</string>
@@ -12,7 +11,7 @@
     <string name="loading">Loading......</string>
     <string name="tap_for_image">Tap for Image</string>
     <string name="camera">Camera</string>
-    <string name="camera_hint">Don\'t know what to cook? Take a picture of the item and see the magic.</string>
+    <string name="camera_hint">Don\'t know what to cook? Take a picture of an item and see the magic.</string>
     <string name="retry">RETRY</string>
     <string name="ingredients">Ingredients</string>
 </resources>
