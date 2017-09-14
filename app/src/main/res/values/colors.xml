@@ -4,5 +4,5 @@
     <color name="colorRedError">#f72f3c</color>
     <color name="colorPrimaryDark">#4a801a</color>
     <color name="colorAccent">#000000</color>
-    <color name="colorGray">#dcdada</color>
+    <color name="colorGrayDefault">#747474</color>
 </resources>

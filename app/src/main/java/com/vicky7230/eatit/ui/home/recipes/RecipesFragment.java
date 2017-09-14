@@ -73,7 +73,7 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
 
         recipesRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         recipesRecyclerView.setItemAnimator(new RecipesItemAnimator());
-        recipesRecyclerView.addItemDecoration(new ItemOffsetDecoration(20));
+        recipesRecyclerView.addItemDecoration(new ItemOffsetDecoration(15));
         recipesRecyclerView.setAdapter(recipesAdapter);
         recipesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 

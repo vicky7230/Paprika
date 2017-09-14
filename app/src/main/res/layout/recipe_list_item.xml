@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -20,6 +21,7 @@
                 android:id="@+id/recipe_image"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
+                android:scaleType="centerCrop"
                 tools:ignore="ContentDescription" />
 
             <ImageView
@@ -28,15 +30,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:scaleType="center"
-                android:src="@drawable/ic_heart_white"
-                android:visibility="invisible" />
+                android:visibility="invisible"
+                app:srcCompat="@drawable/ic_heart_white_60dp" />
 
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:divider="@color/colorGrayDefault"
+            android:orientation="vertical"
+            android:showDividers="middle">
 
             <TextView
                 android:id="@+id/recipe_title"
@@ -44,16 +48,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:padding="10dp"
+                android:padding="7dp"
                 android:textColor="@android:color/black"
+                android:textSize="14sp"
                 tools:ignore="MissingPrefix" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,7 +67,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="10dp"
-                    android:src="@drawable/ic_favorite_border" />
+                    app:srcCompat="@drawable/ic_favorite_border_black_24dp" />
 
                 <ImageView
                     android:id="@+id/share_button"
@@ -80,7 +78,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="10dp"
-                    android:src="@drawable/ic_action_share" />
+                    app:srcCompat="@drawable/ic_share_black_24dp" />
 
                 <ImageView
                     android:id="@+id/ingredients_button"
@@ -91,7 +89,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:padding="10dp"
-                    android:src="@drawable/ic_ingredients" />
+                    app:srcCompat="@drawable/ic_ingredients_black_24dp" />
 
             </LinearLayout>
         </LinearLayout>

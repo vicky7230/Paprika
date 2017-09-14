@@ -161,13 +161,13 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 GlideApp.with(itemView.getContext())
                         .load(recipe.getImageUrl())
                         .transition(withCrossFade())
-                        .centerCrop()
+                        .dontTransform()
                         .into(recipeImageView);
 
             if (recipe.getLiked()) {
-                likeButton.setImageResource(R.drawable.ic_favorite_red);
+                likeButton.setImageResource(R.drawable.ic_favorite_red_24dp);
             } else {
-                likeButton.setImageResource(R.drawable.ic_favorite_border);
+                likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +218,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         protected void clear() {
             recipeTitleTextView.setText("");
             recipeImageView.setImageDrawable(null);
-            likeButton.setImageResource(R.drawable.ic_favorite_border);
+            likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }
     }
 

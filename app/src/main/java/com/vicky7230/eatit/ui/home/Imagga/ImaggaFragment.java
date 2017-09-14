@@ -17,7 +17,6 @@ import android.support.v4.content.FileProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.vicky7230.eatit.BuildConfig;
@@ -55,8 +54,6 @@ public class ImaggaFragment extends BaseFragment implements ImaggaMvpView {
 
     @BindView(R.id.camera_button)
     IconTextView cameraButton;
-    @BindView(R.id.clicked_image)
-    ImageView imageView;
 
     String mCurrentPhotoPath;
 
@@ -172,7 +169,6 @@ public class ImaggaFragment extends BaseFragment implements ImaggaMvpView {
                 ims = new FileInputStream(file);
                 Bitmap imageBitmap = BitmapFactory.decodeStream(ims);
                 if (imageBitmap != null) {
-                    //imageView.setImageBitmap(imageBitmap);
                     presenter.uploadImageToImagga(imageUri.getPath());
                 } else {
                     getBaseActivity().showMessage("Empty bitmap.");

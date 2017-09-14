@@ -114,7 +114,7 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 GlideApp.with(itemView.getContext())
                         .load(likedRecipe.getImageUrl())
                         .transition(withCrossFade())
-                        .centerCrop()
+                        .dontTransform()
                         .into(recipeImageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +134,7 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 }
             });
 
-            likeButton.setImageResource(R.drawable.ic_favorite_red);
+            likeButton.setImageResource(R.drawable.ic_favorite_red_24dp);
         }
 
         @Override

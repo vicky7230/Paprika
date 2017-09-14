@@ -25,16 +25,16 @@ public class HomeActivity extends BaseActivity implements HomeMvpView {
     TabLayout tabLayout;
 
     private final int[] TAB_ICONS_UNSELECTED = {
-            R.drawable.ic_recipes_green,
-            R.drawable.ic_camera_green,
-            R.drawable.ic_likes_green,
-            R.drawable.ic_settings_green
+            R.drawable.ic_recipes_green_24dp,
+            R.drawable.ic_camera_green_24dp,
+            R.drawable.ic_likes_green_24dp,
+            R.drawable.ic_settings_green_24dp
     };
     private final int[] TAB_ICONS_SELECTED = {
-            R.drawable.ic_recipes_white,
-            R.drawable.ic_camera_white,
-            R.drawable.ic_likes_white,
-            R.drawable.ic_settings_white
+            R.drawable.ic_recipes_white_24dp,
+            R.drawable.ic_camera_white_24dp,
+            R.drawable.ic_likes_white_24dp,
+            R.drawable.ic_settings_white_24dp
     };
 
     @Override

@@ -1,4 +1,5 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,12 +15,13 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <ImageView
+            <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/clicked_image"
+                android:text="{md-camera 220dp @color/colorPrimary}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_camera_illustration" />
+                android:gravity="center"
+                android:layout_gravity="center_horizontal" />
 
             <TextView
                 android:id="@+id/camera_text"
@@ -30,7 +32,8 @@
                 android:gravity="center"
                 android:text="@string/camera_hint"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:ignore="MissingPrefix" />
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/camera_button"

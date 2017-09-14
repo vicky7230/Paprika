@@ -16,6 +16,7 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        mavenCentral()
         maven { url 'https://maven.google.com' }
     }
 }
@@ -37,13 +38,13 @@ ext {
     constraintLayoutVersion = '1.0.2'
     gsonVersion = '2.8.1'
     calligraphyVersion = '2.3.0'
-    glideVersion = '4.0.0'
+    glideVersion = '4.1.1'
     iconifyVersion = '2.2.2'
     retrofitVersion = '2.3.0'
     guavaVersion = '23.0-android'
-    okHttpVersion = '3.8.1'
+    okHttpVersion = '3.9.0'
     dagger2Version = '2.11'
-    rxjava2Version = '2.1.2'
+    rxjava2Version = '2.1.3'
     rxandroidVersion = '2.0.1'
     butterKnifeVersion = '8.8.1'
     greenDaoVersion = '3.2.2'
