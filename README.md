@@ -3,18 +3,10 @@ A recipe finding app for people who love to cook.
 
 This repository implements MVP architecture using Dagger2, GreenDao, RxJava and Retrofit2. 
 <p align="center">
-  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-login.png" width="250">
-  <img src="https://janishar.github.io/images/mvp-app-pics/main-view.png" width="250">
-  <img src="https://janishar.github.io/gifs/mvp-app.gif" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/1.png" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/2.png" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/3.png" width="250">
 </p>
-<br>
-<p align="center">
-  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-drawer.png" width="200">
-  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-rating.png" width="200">
-  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-feed.png" width="200">
-  <img src="https://janishar.github.io/images/mvp-app-pics/mvp-empty-state.png" width="200">
-</p>
-<br>
 <br>
 
 # Architecture Blueprint
