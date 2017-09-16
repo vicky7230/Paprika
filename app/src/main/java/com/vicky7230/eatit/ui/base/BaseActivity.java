@@ -35,13 +35,11 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         activityComponent = DaggerActivityComponent.builder()
                 .activityModule(new ActivityModule(this))
                 .networkModule(new NetworkModule(Config.RECIPES_BASE_URL, Config.IMAGGA_BASE_URL))
                 .applicationModule(new ApplicationModule(getApplication()))
                 .build();
-
     }
 
     public ActivityComponent getActivityComponent() {

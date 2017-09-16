@@ -23,6 +23,9 @@ import com.vicky7230.eatit.ui.home.recipes.RecipesAdapter;
 import com.vicky7230.eatit.ui.home.recipes.RecipesMvpPresenter;
 import com.vicky7230.eatit.ui.home.recipes.RecipesMvpView;
 import com.vicky7230.eatit.ui.home.recipes.RecipesPresenter;
+import com.vicky7230.eatit.ui.search.SearchMvpPresenter;
+import com.vicky7230.eatit.ui.search.SearchMvpView;
+import com.vicky7230.eatit.ui.search.SearchPresenter;
 
 import java.util.ArrayList;
 
@@ -61,48 +64,42 @@ public class ActivityModule {
 
     @Provides
     ViewPagerAdapter provideViewPagerAdapter(AppCompatActivity appCompatActivity) {
-
         return new ViewPagerAdapter(appCompatActivity.getSupportFragmentManager());
     }
 
     @Provides
     RecipesAdapter provideRecipeAdapter() {
-
         return new RecipesAdapter(new ArrayList<Recipe>());
     }
 
     @Provides
     LikesAdapter provideFavouritesAdapter() {
-
         return new LikesAdapter(new ArrayList<LikedRecipe>());
     }
 
     @Provides
     HomeMvpPresenter<HomeMvpView> provideHomeMvpPresenter(HomePresenter<HomeMvpView> presenter) {
-
         return presenter;
+    }
 
+    @Provides
+    SearchMvpPresenter<SearchMvpView> provideSearchMvpPresenter(SearchPresenter<SearchMvpView> presenter) {
+        return presenter;
     }
 
     @Provides
     RecipesMvpPresenter<RecipesMvpView> provideRecipesMvpPresenter(RecipesPresenter<RecipesMvpView> presenter) {
-
         return presenter;
-
     }
 
     @Provides
     ImaggaMvpPresenter<ImaggaMvpView> provideRecipeOfDayMvpPresenter(ImaggaPresenter<ImaggaMvpView> presenter) {
-
         return presenter;
-
     }
 
     @Provides
     LikesMvpPresenter<LikesMvpView> provideFavouritesMvpPresenter(LikesPresenter<LikesMvpView> presenter) {
-
         return presenter;
-
     }
 
     @Provides

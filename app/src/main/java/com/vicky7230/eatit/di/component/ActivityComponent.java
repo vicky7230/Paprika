@@ -7,6 +7,7 @@ import com.vicky7230.eatit.ui.home.HomeActivity;
 import com.vicky7230.eatit.ui.home.likes.LikesFragment;
 import com.vicky7230.eatit.ui.home.Imagga.ImaggaFragment;
 import com.vicky7230.eatit.ui.home.recipes.RecipesFragment;
+import com.vicky7230.eatit.ui.search.SearchActivity;
 
 import javax.inject.Singleton;
 
@@ -25,6 +26,8 @@ import dagger.Component;
 public interface ActivityComponent {
 
     void inject(HomeActivity homeActivity);
+
+    void inject(SearchActivity searchActivity);
 
     void inject(RecipesFragment recipesFragment);
 

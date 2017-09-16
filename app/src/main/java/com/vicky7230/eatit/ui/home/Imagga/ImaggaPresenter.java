@@ -18,10 +18,6 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import timber.log.Timber;
 
-/**
- * Created by agrim on 11/8/17.
- */
-
 public class ImaggaPresenter<V extends ImaggaMvpView> extends BasePresenter<V> implements ImaggaMvpPresenter<V> {
 
     @Inject
