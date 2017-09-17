@@ -1,6 +1,7 @@
 package com.vicky7230.eatit.ui.home.likes;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -13,7 +14,7 @@ import android.view.ViewGroup;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.db.model.LikedRecipe;
-import com.vicky7230.eatit.di.component.ActivityComponent;
+import com.vicky7230.eatit.di.component.ApplicationComponent;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 import com.vicky7230.eatit.ui.home.recipes.ItemOffsetDecoration;
 
@@ -23,6 +24,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.support.AndroidSupportInjection;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -47,21 +49,19 @@ public class LikesFragment extends BaseFragment implements LikesMvpView, LikesAd
     }
 
     @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_likes, container, false);
-
-        ActivityComponent component = getActivityComponent();
-
-        if (component != null) {
-
-            component.inject(this);
-            presenter.onAttach(this);
-            ButterKnife.bind(this, view);
-            likesAdapter.setCallback(this);
-        }
-
+        presenter.onAttach(this);
+        ButterKnife.bind(this, view);
+        likesAdapter.setCallback(this);
         return view;
     }
 

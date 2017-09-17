@@ -8,14 +8,17 @@ import com.vicky7230.eatit.data.network.ImaggaService;
 import com.vicky7230.eatit.data.network.RecipeService;
 import com.vicky7230.eatit.di.ApplicationContext;
 import com.vicky7230.eatit.di.ApplicationInterceptor;
+import com.vicky7230.eatit.di.ImaggaBaseUrl;
 import com.vicky7230.eatit.di.ImaggaRetrofit;
 import com.vicky7230.eatit.di.NetworkInterceptor;
+import com.vicky7230.eatit.di.RecipesBaseUrl;
 import com.vicky7230.eatit.di.RecipesRetrofit;
 import com.vicky7230.eatit.utils.NetworkUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -34,14 +37,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class NetworkModule {
-
-    private final String recipesBaseUrl;
-    private final String imaggaBaseUrl;
-
-    public NetworkModule(String recipesBaseUrl, String imaggaBaseUrl) {
-        this.recipesBaseUrl = recipesBaseUrl;
-        this.imaggaBaseUrl = imaggaBaseUrl;
-    }
 
     @Provides
     @Singleton
@@ -132,7 +127,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     @RecipesRetrofit
-    Retrofit provideRecipesRetrofit(GsonConverterFactory gsonConverterFactory, RxJava2CallAdapterFactory rxJava2CallAdapterFactory, OkHttpClient okHttpClient) {
+    Retrofit provideRecipesRetrofit(@RecipesBaseUrl String recipesBaseUrl, GsonConverterFactory gsonConverterFactory, RxJava2CallAdapterFactory rxJava2CallAdapterFactory, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(recipesBaseUrl)
                 .addConverterFactory(gsonConverterFactory)
@@ -144,7 +139,7 @@ public class NetworkModule {
     @Provides
     @Singleton
     @ImaggaRetrofit
-    Retrofit provideImaggaRetrofit(GsonConverterFactory gsonConverterFactory, RxJava2CallAdapterFactory rxJava2CallAdapterFactory, OkHttpClient okHttpClient) {
+    Retrofit provideImaggaRetrofit(@ImaggaBaseUrl String imaggaBaseUrl,GsonConverterFactory gsonConverterFactory, RxJava2CallAdapterFactory rxJava2CallAdapterFactory, OkHttpClient okHttpClient) {
         return new Retrofit.Builder()
                 .baseUrl(imaggaBaseUrl)
                 .addConverterFactory(gsonConverterFactory)

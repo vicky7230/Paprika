@@ -6,11 +6,9 @@ import java.lang.annotation.RetentionPolicy;
 import javax.inject.Qualifier;
 
 /**
- * Created by agrim on 4/7/17.
+ * Created by vicky on 22/7/17.
  */
-
-
 @Qualifier
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ActivityContext {
+public @interface RecipesBaseUrl {
 }

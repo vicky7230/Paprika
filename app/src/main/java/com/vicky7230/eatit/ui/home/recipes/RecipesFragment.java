@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
-import com.vicky7230.eatit.di.component.ActivityComponent;
+import com.vicky7230.eatit.di.component.ApplicationComponent;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 import com.vicky7230.eatit.ui.search.SearchActivity;
 
@@ -30,6 +29,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.AndroidInjection;
+import dagger.android.support.AndroidSupportInjection;
 
 public class RecipesFragment extends BaseFragment implements RecipesMvpView, RecipesAdapter.Callback {
 
@@ -56,15 +57,17 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     }
 
     @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_recipes, container, false);
-        ActivityComponent component = getActivityComponent();
-        if (component != null) {
-            component.inject(this);
-            presenter.onAttach(this);
-            ButterKnife.bind(this, view);
-            recipesAdapter.setCallback(this);
-        }
+        presenter.onAttach(this);
+        ButterKnife.bind(this, view);
+        recipesAdapter.setCallback(this);
         return view;
     }
 

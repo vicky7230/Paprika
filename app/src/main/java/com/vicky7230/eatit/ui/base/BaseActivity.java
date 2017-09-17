@@ -10,13 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.vicky7230.eatit.R;
-import com.vicky7230.eatit.data.Config;
-import com.vicky7230.eatit.di.component.ActivityComponent;
-import com.vicky7230.eatit.di.component.DaggerActivityComponent;
-import com.vicky7230.eatit.di.module.ActivityModule;
-import com.vicky7230.eatit.di.module.ApplicationModule;
-import com.vicky7230.eatit.di.module.NetworkModule;
 import com.vicky7230.eatit.utils.CommonUtils;
 
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -24,8 +17,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class BaseActivity extends AppCompatActivity implements MvpView {
 
     private Dialog progressDialog;
-
-    private ActivityComponent activityComponent;
 
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -35,15 +26,6 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        activityComponent = DaggerActivityComponent.builder()
-                .activityModule(new ActivityModule(this))
-                .networkModule(new NetworkModule(Config.RECIPES_BASE_URL, Config.IMAGGA_BASE_URL))
-                .applicationModule(new ApplicationModule(getApplication()))
-                .build();
-    }
-
-    public ActivityComponent getActivityComponent() {
-        return activityComponent;
     }
 
     private void displayMessage(String message) {

@@ -2,6 +2,7 @@ package com.vicky7230.eatit.ui.home.Imagga;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -21,7 +22,7 @@ import android.view.ViewGroup;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.vicky7230.eatit.BuildConfig;
 import com.vicky7230.eatit.R;
-import com.vicky7230.eatit.di.component.ActivityComponent;
+import com.vicky7230.eatit.di.component.ApplicationComponent;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 
 import java.io.File;
@@ -38,6 +39,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.AndroidSupportInjection;
 import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
@@ -65,17 +67,16 @@ public class ImaggaFragment extends BaseFragment implements ImaggaMvpView {
     }
 
     @Override
+    public void onAttach(Context context) {
+        AndroidSupportInjection.inject(this);
+        super.onAttach(context);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_imagga, container, false);
-
-        ActivityComponent component = getActivityComponent();
-
-        if (component != null) {
-            component.inject(this);
-            presenter.onAttach(this);
-            ButterKnife.bind(this, view);
-        }
-
+        presenter.onAttach(this);
+        ButterKnife.bind(this, view);
         return view;
     }
 

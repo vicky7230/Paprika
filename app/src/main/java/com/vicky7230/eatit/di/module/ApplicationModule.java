@@ -1,8 +1,8 @@
 package com.vicky7230.eatit.di.module;
 
-import android.app.Application;
 import android.content.Context;
 
+import com.vicky7230.eatit.PaprikaApplication;
 import com.vicky7230.eatit.data.AppDataManager;
 import com.vicky7230.eatit.data.Config;
 import com.vicky7230.eatit.data.DataManager;
@@ -12,11 +12,14 @@ import com.vicky7230.eatit.data.network.ApiHelper;
 import com.vicky7230.eatit.data.network.AppApiHelper;
 import com.vicky7230.eatit.di.ApplicationContext;
 import com.vicky7230.eatit.di.DatabaseInfo;
+import com.vicky7230.eatit.di.ImaggaBaseUrl;
+import com.vicky7230.eatit.di.RecipesBaseUrl;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
 
 /**
  * Created by vicky on 25/6/17.
@@ -25,33 +28,27 @@ import dagger.Provides;
 @Module
 public class ApplicationModule {
 
-    private final Application application;
-
-    public ApplicationModule(Application application) {
-        this.application = application;
-    }
-
     @Provides
     @ApplicationContext
-    Context provideContext() {
-        return application;
+    Context provideContext(PaprikaApplication paprikaApplication) {
+        return paprikaApplication.getApplicationContext();
     }
 
     @Provides
-    Application provideApplication() {
-        return application;
+    CompositeDisposable provideCompositeDisposable() {
+        return new CompositeDisposable();
     }
 
     @Provides
-    @Singleton
-    DataManager provideDataManager(AppDataManager appDataManager) {
-        return appDataManager;
+    @RecipesBaseUrl
+    String provideRecipesBaseUrl() {
+        return Config.RECIPES_BASE_URL;
     }
 
     @Provides
-    @Singleton
-    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
-        return appApiHelper;
+    @ImaggaBaseUrl
+    String provideImaggaBaseUrl() {
+        return Config.IMAGGA_BASE_URL;
     }
 
     @Provides
@@ -62,8 +59,20 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
+    }
+
+    @Provides
+    @Singleton
     DbHelper provideDbHelper(AppDbHelper appDbHelper) {
         return appDbHelper;
+    }
+
+    @Provides
+    @Singleton
+    ApiHelper provideApiHelper(AppApiHelper appApiHelper) {
+        return appApiHelper;
     }
 
 }

@@ -1,24 +1,38 @@
 package com.vicky7230.eatit;
 
+import android.app.Activity;
 import android.app.Application;
 
 import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.Iconify;
 import com.joanzapata.iconify.fonts.IoniconsModule;
 import com.joanzapata.iconify.fonts.MaterialModule;
+import com.vicky7230.eatit.di.component.DaggerApplicationComponent;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
 import timber.log.Timber;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
-/**
- * Created by vicky on 25/6/17.
- */
 
-public class PaprikaApplication extends Application {
+public class PaprikaApplication extends Application implements HasActivityInjector {
+
+    @Inject
+    DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Override
     public void onCreate() {
         super.onCreate();
+
+        DaggerApplicationComponent
+                .builder()
+                .application(this)
+                .build()
+                .inject(this);
+
 
         //Stetho initialization
         if (BuildConfig.DEBUG) {
@@ -43,4 +57,8 @@ public class PaprikaApplication extends Application {
                 .with(new MaterialModule());
     }
 
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return activityDispatchingAndroidInjector;
+    }
 }

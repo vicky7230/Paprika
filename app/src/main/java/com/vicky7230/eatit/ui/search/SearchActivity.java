@@ -11,6 +11,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public class SearchActivity extends BaseActivity implements SearchMvpView {
 
@@ -22,16 +23,14 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        getActivityComponent().inject(this);
         ButterKnife.bind(this);
-
         init();
     }
 
     private void init() {
-
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -41,13 +40,11 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 finish();
                 return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

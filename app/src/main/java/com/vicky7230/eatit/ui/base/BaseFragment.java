@@ -10,10 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 
-import com.vicky7230.eatit.di.component.ActivityComponent;
 import com.vicky7230.eatit.utils.CommonUtils;
 
 /**
@@ -28,7 +26,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         // Required empty public constructor
     }
 
-
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -41,17 +38,6 @@ public abstract class BaseFragment extends Fragment implements MvpView {
         if (context instanceof BaseActivity) {
             baseActivity = (BaseActivity) context;
         }
-    }
-
-    public ActivityComponent getActivityComponent() {
-
-        if (baseActivity != null) {
-
-            return baseActivity.getActivityComponent();
-
-        }
-
-        return null;
     }
 
     protected abstract void setUp(View view);
@@ -97,8 +83,7 @@ public abstract class BaseFragment extends Fragment implements MvpView {
     public boolean hasPermissions(String[] permissions) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
             return true;
-        for (String permission :
-                permissions) {
+        for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(getBaseActivity(), permission) != PackageManager.PERMISSION_GRANTED)
                 return false;
         }
