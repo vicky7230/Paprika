@@ -66,7 +66,6 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
             @Override
             public void onPageSelected(int position) {
                 for (int i = 0; i < tabLayout.getTabCount(); ++i)
-
                     tabLayout.getTabAt(i).setIcon(
                             i != position ?
                                     TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
@@ -81,7 +80,6 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
         tabLayout.setupWithViewPager(viewPager);
         for (int i = 0; i < tabLayout.getTabCount(); ++i)
-
             tabLayout.getTabAt(i).setIcon(
                     i != viewPager.getCurrentItem() ?
                             TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
