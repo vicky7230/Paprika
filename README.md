@@ -1,6 +1,7 @@
 # Paprika
 
 ![alt text](https://github.com/vicky7230/Paprika/blob/master/app/src/main/res/mipmap-xhdpi/ic_launcher.png "Logo")
+<br>
 A recipe finding app for people who love to cook.
 
 This repository implements MVP architecture using Dagger2, GreenDao, RxJava and Retrofit2. 
