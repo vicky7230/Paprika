@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
-import com.vicky7230.eatit.di.component.ApplicationComponent;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 import com.vicky7230.eatit.ui.search.SearchActivity;
 
@@ -29,7 +28,6 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import dagger.android.AndroidInjection;
 import dagger.android.support.AndroidSupportInjection;
 
 public class RecipesFragment extends BaseFragment implements RecipesMvpView, RecipesAdapter.Callback {
@@ -140,10 +138,10 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
 
     @Override
     public void showErrorInRecyclerView() {
-        RecipesAdapter.ProgressViewHolder progressViewHolder = (RecipesAdapter.ProgressViewHolder) recipesRecyclerView.findViewHolderForAdapterPosition(recipesAdapter.getItemCount() - 1);
-        if (progressViewHolder != null) {
-            progressViewHolder.loading.setVisibility(View.GONE);
-            progressViewHolder.retryButton.setVisibility(View.VISIBLE);
+        RecipesAdapter.LoadingMoreViewHolder loadingMoreViewHolder = (RecipesAdapter.LoadingMoreViewHolder) recipesRecyclerView.findViewHolderForAdapterPosition(recipesAdapter.getItemCount() - 1);
+        if (loadingMoreViewHolder != null) {
+            loadingMoreViewHolder.loading.setVisibility(View.GONE);
+            loadingMoreViewHolder.retryButton.setVisibility(View.VISIBLE);
         }
     }
 

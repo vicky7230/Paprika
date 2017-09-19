@@ -52,7 +52,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
 
         if (preInfo instanceof RecipesItemHolderInfo) {
             RecipesItemHolderInfo recipesItemHolderInfo = (RecipesItemHolderInfo) preInfo;
-            RecipesAdapter.ViewHolder holder = (RecipesAdapter.ViewHolder) newHolder;
+            RecipesAdapter.RecipeViewHolder holder = (RecipesAdapter.RecipeViewHolder) newHolder;
 
             animateHeartButton(holder);
             if (RecipesAdapter.ACTION_LIKE_IMAGE_DOUBLE_CLICKED.equals(recipesItemHolderInfo.updateAction)) {
@@ -65,7 +65,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
     }
 
 
-    private void animateHeartButton(final RecipesAdapter.ViewHolder holder) {
+    private void animateHeartButton(final RecipesAdapter.RecipeViewHolder holder) {
         AnimatorSet animatorSet = new AnimatorSet();
 
         ObjectAnimator rotation = ObjectAnimator.ofFloat(holder.likeButton, "rotation", 0.0f, 360.0f);
@@ -101,7 +101,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
 
     }
 
-    private void animatePhotoLike(final RecipesAdapter.ViewHolder holder) {
+    private void animatePhotoLike(final RecipesAdapter.RecipeViewHolder holder) {
         holder.imageViewLike.setVisibility(View.VISIBLE);
 
         holder.imageViewLike.setScaleY(0.0f);
@@ -130,7 +130,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
         animatorSet.start();
     }
 
-    private void resetLikeAnimationState(RecipesAdapter.ViewHolder holder) {
+    private void resetLikeAnimationState(RecipesAdapter.RecipeViewHolder holder) {
         holder.imageViewLike.setVisibility(View.INVISIBLE);
     }
 

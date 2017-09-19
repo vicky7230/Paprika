@@ -1,7 +1,6 @@
 package com.vicky7230.eatit.ui.home.recipes;
 
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
-import com.vicky7230.eatit.ui.base.BaseViewHolder;
 import com.vicky7230.eatit.utils.GlideApp;
 import com.vicky7230.eatit.utils.NetworkUtils;
 
@@ -32,13 +30,13 @@ import butterknife.ButterKnife;
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 
-public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final String ACTION_LIKE_BUTTON_CLICKED = "action_like_button_button";
     public static final String ACTION_LIKE_IMAGE_DOUBLE_CLICKED = "action_like_image_button";
 
-    public static final int VIEW_TYPE_LOADING = 100;
-    public static final int VIEW_TYPE_ITEM = 200;
+    public static final int TYPE_LOADING_MORE = 1;
+    public static final int TYPE_RECIPE = -1;
 
     public interface Callback {
         void onLikeRecipeClick(int position);
@@ -85,33 +83,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemViewType(int position) {
-        return recipeList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
-    }
-
-    @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (viewType == VIEW_TYPE_ITEM)
-            return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false));
-        else if (viewType == VIEW_TYPE_LOADING)
-            return new ProgressViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipes_list_view_footer, parent, false));
-
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-        holder.onBind(position);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(BaseViewHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        if (holder instanceof ProgressViewHolder) {
-            if (!NetworkUtils.isNetworkConnected(((ProgressViewHolder) holder).itemView.getContext())) {
-                ((ProgressViewHolder) holder).loading.setVisibility(View.GONE);
-                ((ProgressViewHolder) holder).retryButton.setVisibility(View.VISIBLE);
-            }
-        }
+        return recipeList.get(position) == null ? TYPE_LOADING_MORE : TYPE_RECIPE;
     }
 
     @Override
@@ -120,7 +92,10 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public Recipe getItem(int position) {
-        return recipeList.get(position);
+        if (position != RecyclerView.NO_POSITION)
+            return recipeList.get(position);
+        else
+            return null;
     }
 
     @Override
@@ -128,7 +103,145 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return recipeList == null ? 0 : recipeList.size();
     }
 
-    public class ViewHolder extends BaseViewHolder {
+    @Override
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case TYPE_RECIPE:
+                return createRecipeViewHolder(parent);
+            case TYPE_LOADING_MORE:
+                return createLoadingMoreViewHolder(parent);
+        }
+        return null;
+    }
+
+    private RecyclerView.ViewHolder createRecipeViewHolder(ViewGroup parent) {
+        final RecipeViewHolder recipeViewHolder = new RecipeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false));
+
+        recipeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Recipe recipe = getItem(recipeViewHolder.getAdapterPosition());
+                if (recipe != null) {
+                    tapCount++;
+                    if (tapCount == 1) {
+                        new Handler().postDelayed(new Runnable() {
+                            public void run() {
+                                if (tapCount == 1) {
+                                    onSingleClick(recipe, recipeViewHolder.itemView.getContext());
+                                }
+                                tapCount = 0;
+                            }
+                        }, 250);
+                    } else if (tapCount == 2) {
+                        tapCount = 0;
+                        onDoubleClick(recipeViewHolder.getAdapterPosition(), recipe);
+                    }
+                }
+            }
+        });
+
+        recipeViewHolder.likeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Recipe recipe = getItem(recipeViewHolder.getAdapterPosition());
+                if (recipe != null) {
+                    notifyItemChanged(recipeViewHolder.getAdapterPosition(), ACTION_LIKE_BUTTON_CLICKED);
+                    callback.onLikeRecipeClick(recipeViewHolder.getAdapterPosition());
+                    recipe.setLiked(true);
+                }
+            }
+        });
+
+        recipeViewHolder.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Recipe recipe = getItem(recipeViewHolder.getAdapterPosition());
+                if (recipe != null) {
+                    callback.onShareClick(recipe.getSourceUrl());
+                }
+            }
+        });
+
+        recipeViewHolder.ingredientsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Recipe recipe = getItem(recipeViewHolder.getAdapterPosition());
+                if (recipe != null) {
+                    callback.onIngredientsClick(recipe.getRecipeId());
+                }
+            }
+        });
+
+        return recipeViewHolder;
+    }
+
+    private void onDoubleClick(int position, Recipe recipe) {
+        notifyItemChanged(position, ACTION_LIKE_IMAGE_DOUBLE_CLICKED);
+        callback.onLikeRecipeClick(position);
+        recipe.setLiked(true);
+    }
+
+    private void onSingleClick(Recipe recipe, Context context) {
+        if (recipe.getSourceUrl() != null) {
+            CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                    .setShowTitle(true)
+                    .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
+                    .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+                    .addDefaultShareMenuItem()
+                    .build();
+            customTabsIntent.launchUrl(context, Uri.parse(recipe.getSourceUrl()));
+        }
+    }
+
+    private RecyclerView.ViewHolder createLoadingMoreViewHolder(ViewGroup parent) {
+        final LoadingMoreViewHolder loadingMoreViewHolder = new LoadingMoreViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipes_list_view_footer, parent, false));
+
+        loadingMoreViewHolder.retryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                loadingMoreViewHolder.loading.setVisibility(View.VISIBLE);
+                loadingMoreViewHolder.retryButton.setVisibility(View.GONE);
+                callback.onRetryClick();
+            }
+        });
+
+        return loadingMoreViewHolder;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        switch (getItemViewType(position)) {
+            case TYPE_RECIPE:
+                ((RecipeViewHolder) holder).onBind(position);
+                break;
+            case TYPE_LOADING_MORE:
+                ((LoadingMoreViewHolder) holder).onBind(position);
+                break;
+        }
+    }
+
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder instanceof RecipeViewHolder) {
+            ((RecipeViewHolder) holder).recipeTitleTextView.setText("");
+            ((RecipeViewHolder) holder).recipeImageView.setImageDrawable(null);
+            ((RecipeViewHolder) holder).likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+        }
+    }
+
+    @Override
+    public void onViewAttachedToWindow(RecyclerView.ViewHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        if (holder instanceof LoadingMoreViewHolder) {
+            if (!NetworkUtils.isNetworkConnected(((LoadingMoreViewHolder) holder).itemView.getContext())) {
+                ((LoadingMoreViewHolder) holder).loading.setVisibility(View.GONE);
+                ((LoadingMoreViewHolder) holder).retryButton.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+    public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.recipe_title)
         TextView recipeTitleTextView;
@@ -143,15 +256,12 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @BindView(R.id.ingredients_button)
         ImageView ingredientsButton;
 
-        public ViewHolder(View itemView) {
+        public RecipeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        @Override
         public void onBind(final int position) {
-            super.onBind(position);
-
             final Recipe recipe = recipeList.get(position);
 
             if (recipe.getTitle() != null)
@@ -169,109 +279,25 @@ public class RecipesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             } else {
                 likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
             }
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    tapCount++;
-                    if (tapCount == 1) {
-                        new Handler().postDelayed(new Runnable() {
-                            public void run() {
-                                if (tapCount == 1) {
-                                    onSingleClick(recipe, itemView.getContext());
-                                }
-                                tapCount = 0;
-                            }
-                        }, 250);
-                    } else if (tapCount == 2) {
-                        tapCount = 0;
-                        onDoubleClick(position, recipe);
-                    }
-                }
-            });
-
-            likeButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    notifyItemChanged(position, ACTION_LIKE_BUTTON_CLICKED);
-                    callback.onLikeRecipeClick(position);
-                    recipe.setLiked(true);
-                }
-            });
-
-            shareButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callback.onShareClick(recipe.getSourceUrl());
-                }
-            });
-
-            ingredientsButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callback.onIngredientsClick(recipe.getRecipeId());
-                }
-            });
-        }
-
-        @Override
-        protected void clear() {
-            recipeTitleTextView.setText("");
-            recipeImageView.setImageDrawable(null);
-            likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
         }
     }
 
-    private void onDoubleClick(int position, Recipe recipe) {
-        notifyItemChanged(position, ACTION_LIKE_IMAGE_DOUBLE_CLICKED);
-        callback.onLikeRecipeClick(position);
-        recipe.setLiked(true);
-    }
-
-    private void onSingleClick(Recipe recipe, Context context) {
-        if (recipe.getSourceUrl() != null) {
-            CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-                    .setShowTitle(true)
-                    .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                    .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
-                    .build();
-            customTabsIntent.launchUrl(context, Uri.parse(recipe.getSourceUrl()));
-        }
-    }
-
-    public class ProgressViewHolder extends BaseViewHolder {
+    public class LoadingMoreViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.loading)
         LinearLayout loading;
         @BindView(R.id.retry_button)
         IconTextView retryButton;
 
-        public ProgressViewHolder(View itemView) {
+        public LoadingMoreViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        @Override
         public void onBind(int position) {
-            super.onBind(position);
             StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setFullSpan(true);
             itemView.setLayoutParams(layoutParams);
-
-            retryButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    loading.setVisibility(View.VISIBLE);
-                    retryButton.setVisibility(View.GONE);
-                    callback.onRetryClick();
-                }
-            });
-
-        }
-
-        @Override
-        protected void clear() {
-
         }
     }
 }
