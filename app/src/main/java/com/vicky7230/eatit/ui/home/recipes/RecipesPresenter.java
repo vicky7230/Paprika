@@ -22,7 +22,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V> implements RecipesMvpPresenter<V> {
+public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V> implements
+        RecipesMvpPresenter<V> {
 
     private int page = 1;
 
@@ -41,7 +42,6 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
         getCompositeDisposable().add(getDataManager()
                 .getRecipes(String.valueOf(page))
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<Recipes, Recipes>() {
                     @Override
                     public Recipes apply(@NonNull Recipes recipes) throws Exception {
@@ -57,6 +57,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         return recipes;
                     }
                 })
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Recipes>() {
                     @Override
                     public void accept(Recipes recipes) throws Exception {
@@ -145,7 +146,8 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         if (singleRecipe != null && singleRecipe.getRecipe() != null) {
                             if (singleRecipe.getRecipe().getIngredients() != null) {
                                 for (int i = 0; i < singleRecipe.getRecipe().getIngredients().size(); ++i) {
-                                    singleRecipe.getRecipe().getIngredients().set(i, singleRecipe.getRecipe().getIngredients().get(i).trim());
+                                    singleRecipe.getRecipe().getIngredients()
+                                            .set(i, singleRecipe.getRecipe().getIngredients().get(i).trim());
                                 }
                             }
                         }

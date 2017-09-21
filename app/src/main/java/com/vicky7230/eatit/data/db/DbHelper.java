@@ -20,7 +20,7 @@ public interface DbHelper {
 
     Flowable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe);
 
-    Flowable<Long> insertLikedRecipe(LikedRecipe likedRecipe);
+    Flowable<Long> insertLikedRecipe(final LikedRecipe likedRecipe);
 
     Flowable<List<LikedRecipe>> getLastInsertedLikedRecipe();
 

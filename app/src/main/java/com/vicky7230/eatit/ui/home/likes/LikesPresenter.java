@@ -65,13 +65,14 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
 
         getCompositeDisposable().add(getDataManager()
                 .getLastInsertedLikedRecipe()
-                .subscribeOn(Schedulers.computation())
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<List<LikedRecipe>>() {
                     @Override
                     public void accept(List<LikedRecipe> likedRecipeList) throws Exception {
                         if (likedRecipeList != null)
-                            getMvpView().updateFavouriteRecipeList(likedRecipeList);
+                            Timber.d("count : " + likedRecipeList.size());
+                        getMvpView().updateFavouriteRecipeList(likedRecipeList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

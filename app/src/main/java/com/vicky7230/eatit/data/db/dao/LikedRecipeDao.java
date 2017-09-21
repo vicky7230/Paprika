@@ -26,7 +26,7 @@ public interface LikedRecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Long insertLikedRecipe(LikedRecipe likedRecipe);
 
-    @Query("SELECT * FROM liked_recipes ORDER BY id DESC LIMIT 0,1")
+    @Query("SELECT * FROM liked_recipes ORDER BY id DESC LIMIT 1")
     Flowable<List<LikedRecipe>> getLastInsertedLikedRecipe();
 
 }
