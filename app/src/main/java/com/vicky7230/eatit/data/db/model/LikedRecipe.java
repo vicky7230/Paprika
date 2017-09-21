@@ -1,15 +1,12 @@
 package com.vicky7230.eatit.data.db.model;
 
-import org.greenrobot.greendao.annotation.Entity;
-import org.greenrobot.greendao.annotation.Id;
-import org.greenrobot.greendao.annotation.Property;
-import org.greenrobot.greendao.annotation.Generated;
+import android.arch.persistence.room.Entity;
 
 /**
  * Created by agrim on 21/7/17.
  */
 
-@Entity(nameInDb = "liked_recipes")
+@Entity
 public class LikedRecipe {
 
     @Id(autoincrement = true)

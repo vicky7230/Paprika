@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
@@ -26,10 +25,6 @@ android {
     }
 }
 
-greendao {
-    schemaVersion 1
-}
-
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.3-alpha', {
@@ -52,11 +47,9 @@ dependencies {
     implementation "com.github.bumptech.glide:recyclerview-integration:$rootProject.glideVersion"
     implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideVersion"
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
-    implementation "com.joanzapata.iconify:android-iconify-ionicons:$rootProject.iconifyVersion"
-    implementation "com.joanzapata.iconify:android-iconify-material:$rootProject.iconifyVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
-    implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
+    //implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
@@ -69,4 +62,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     debugImplementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stethoVersion"
+    implementation "android.arch.persistence.room:runtime:$rootProject.room"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.room"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.room"
 }
