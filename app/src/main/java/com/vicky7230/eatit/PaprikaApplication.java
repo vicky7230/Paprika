@@ -50,6 +50,11 @@ public class PaprikaApplication extends Application implements HasActivityInject
                 .setFontAttrId(R.attr.fontPath)
                 .build()
         );
+
+        //Iconify Initialization
+        Iconify
+                .with(new IoniconsModule())
+                .with(new MaterialModule());
     }
 
     @Override

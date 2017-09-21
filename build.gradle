@@ -39,6 +39,7 @@ ext {
     gsonVersion = '2.8.1'
     calligraphyVersion = '2.3.0'
     glideVersion = '4.1.1'
+    iconifyVersion = '2.2.2'
     retrofitVersion = '2.3.0'
     okHttpVersion = '3.9.0'
     dagger2Version = '2.11'

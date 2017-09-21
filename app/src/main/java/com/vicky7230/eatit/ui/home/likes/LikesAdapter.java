@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.ui.base.BaseViewHolder;
 import com.vicky7230.eatit.utils.GlideApp;
 

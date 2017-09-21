@@ -1,10 +1,11 @@
 package com.vicky7230.eatit.data.db;
 
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 
 import java.util.List;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 
 /**
@@ -13,15 +14,15 @@ import io.reactivex.Observable;
 
 public interface DbHelper {
 
-    Boolean checkIfRecipeIsLiked(final Recipe recipe);
+    Flowable<List<LikedRecipe>> getAllLikedRecipes();
 
-    Observable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe);
+    List<LikedRecipe> checkIfRecipeIsLiked(Recipe recipe);
 
-    Observable<Long> insertLikedRecipe(final LikedRecipe likedRecipe);
+    Flowable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe);
 
-    Observable<List<LikedRecipe>> getAllLikedRecipes();
+    Flowable<Long> insertLikedRecipe(LikedRecipe likedRecipe);
 
-    Observable<List<LikedRecipe>> getLastInsertedLikedRecipe();
+    Flowable<List<LikedRecipe>> getLastInsertedLikedRecipe();
 
-    Observable<Boolean> deleteLikedRecipe(LikedRecipe likedRecipe);
+    //Observable<Boolean> deleteLikedRecipe(LikedRecipe likedRecipe);
 }

@@ -12,6 +12,7 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
+
     buildTypes {
         release {
             shrinkResources true
@@ -47,6 +48,8 @@ dependencies {
     implementation "com.github.bumptech.glide:recyclerview-integration:$rootProject.glideVersion"
     implementation "com.github.bumptech.glide:okhttp3-integration:$rootProject.glideVersion"
     implementation "uk.co.chrisjenx:calligraphy:$rootProject.calligraphyVersion"
+    implementation "com.joanzapata.iconify:android-iconify-ionicons:$rootProject.iconifyVersion"
+    implementation "com.joanzapata.iconify:android-iconify-material:$rootProject.iconifyVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
     //implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"

@@ -13,8 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.vicky7230.eatit.R;
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
-import com.vicky7230.eatit.di.component.ApplicationComponent;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 import com.vicky7230.eatit.ui.home.recipes.ItemOffsetDecoration;
 

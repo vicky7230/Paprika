@@ -1,7 +1,7 @@
 package com.vicky7230.eatit.ui.home.recipes;
 
 import com.vicky7230.eatit.data.DataManager;
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
 import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -47,7 +47,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                     public Recipes apply(@NonNull Recipes recipes) throws Exception {
                         if (recipes != null && recipes.getRecipes() != null) {
                             for (Recipe recipe : recipes.getRecipes()) {
-                                if (getDataManager().checkIfRecipeIsLiked(recipe)) {
+                                if (getDataManager().checkIfRecipeIsLiked(recipe).size() > 0) {
                                     recipe.setLiked(true);
                                 } else {
                                     recipe.setLiked(false);
@@ -104,7 +104,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
     }
 
     private void insertLikedRecipe(Recipe recipe) {
-        Observable<Long> longObservable = getDataManager().insertLikedRecipe(
+        Flowable<Long> longFlowable = getDataManager().insertLikedRecipe(
                 new LikedRecipe(
                         recipe.getRecipeId(),
                         recipe.getTitle(),
@@ -112,7 +112,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         recipe.getSourceUrl()
                 )
         );
-        getCompositeDisposable().add(longObservable
+        getCompositeDisposable().add(longFlowable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {

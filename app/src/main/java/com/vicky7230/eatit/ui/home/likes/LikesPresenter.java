@@ -1,7 +1,7 @@
 package com.vicky7230.eatit.ui.home.likes;
 
 import com.vicky7230.eatit.data.DataManager;
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.rxBus.RxBus;
 import com.vicky7230.eatit.rxBus.events.LikesUpdatedEvent;
 import com.vicky7230.eatit.ui.base.BasePresenter;
@@ -86,7 +86,7 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
     @Override
     public void removeRecipeFromFavourites(LikedRecipe likedRecipe, final int position) {
 
-        getCompositeDisposable().add(getDataManager()
+        /*getCompositeDisposable().add(getDataManager()
                 .deleteLikedRecipe(likedRecipe)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -106,7 +106,7 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
                         getMvpView().showError(throwable.getMessage());
                     }
                 })
-        );
+        );*/
     }
 
 }

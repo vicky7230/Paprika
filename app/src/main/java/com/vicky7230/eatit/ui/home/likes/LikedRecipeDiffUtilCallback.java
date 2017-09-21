@@ -2,8 +2,7 @@ package com.vicky7230.eatit.ui.home.likes;
 
 import android.support.v7.util.DiffUtil;
 
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
-import com.vicky7230.eatit.data.network.model.recipes.Recipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 
 import java.util.List;
 

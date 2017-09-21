@@ -1,81 +1,56 @@
 package com.vicky7230.eatit.data.db;
 
-import com.vicky7230.eatit.data.db.model.DaoMaster;
-import com.vicky7230.eatit.data.db.model.DaoSession;
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
-import com.vicky7230.eatit.data.db.model.LikedRecipeDao;
+import android.arch.persistence.room.Room;
+import android.content.Context;
+
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
+import com.vicky7230.eatit.di.ApplicationContext;
+import com.vicky7230.eatit.di.DatabaseInfo;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Flowable;
 
 public class AppDbHelper implements DbHelper {
 
-    private final DaoSession daoSession;
+    private final RecipeDatabase recipeDatabase;
 
     @Inject
-    public AppDbHelper(DbOpenHelper dbOpenHelper) {
-        daoSession = new DaoMaster(dbOpenHelper.getWritableDb()).newSession();
+    public AppDbHelper(@ApplicationContext Context context, @DatabaseInfo String dbName) {
+        recipeDatabase = Room.databaseBuilder(context, RecipeDatabase.class, dbName).build();
     }
 
     @Override
-    public Boolean checkIfRecipeIsLiked(final Recipe recipe) {
-        List<LikedRecipe> list = daoSession.getLikedRecipeDao().queryBuilder().where(LikedRecipeDao.Properties.RecipeId.eq(recipe.getRecipeId())).list();
-        return list != null && list.size() > 0;
+    public Flowable<List<LikedRecipe>> getAllLikedRecipes() {
+        return recipeDatabase.likedRecipeDao().getAllLikedRecipes();
     }
 
     @Override
-    public Observable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(final Recipe recipe) {
-        return Observable.fromCallable(new Callable<List<LikedRecipe>>() {
-            @Override
-            public List<LikedRecipe> call() throws Exception {
-                return daoSession.getLikedRecipeDao().queryBuilder().where(LikedRecipeDao.Properties.RecipeId.eq(recipe.getRecipeId())).list();
-            }
-        });
+    public List<LikedRecipe> checkIfRecipeIsLiked(Recipe recipe) {
+        return recipeDatabase.likedRecipeDao().checkIfRecipeIsLiked(recipe.getRecipeId());
     }
 
     @Override
-    public Observable<Long> insertLikedRecipe(final LikedRecipe likedRecipe) {
-        return Observable.fromCallable(new Callable<Long>() {
+    public Flowable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe) {
+        return recipeDatabase.likedRecipeDao().checkIfRecipeIsAlreadyLiked(recipe.getRecipeId());
+    }
+
+    @Override
+    public Flowable<Long> insertLikedRecipe(final LikedRecipe likedRecipe) {
+        return Flowable.fromCallable(new Callable<Long>() {
             @Override
             public Long call() throws Exception {
-                return daoSession.getLikedRecipeDao().insert(likedRecipe);
+                return recipeDatabase.likedRecipeDao().insertLikedRecipe(likedRecipe);
             }
         });
     }
 
     @Override
-    public Observable<List<LikedRecipe>> getAllLikedRecipes() {
-        return Observable.fromCallable(new Callable<List<LikedRecipe>>() {
-            @Override
-            public List<LikedRecipe> call() throws Exception {
-                return daoSession.getLikedRecipeDao().loadAll();
-            }
-        });
-    }
-
-    @Override
-    public Observable<List<LikedRecipe>> getLastInsertedLikedRecipe() {
-        return Observable.fromCallable(new Callable<List<LikedRecipe>>() {
-            @Override
-            public List<LikedRecipe> call() throws Exception {
-                return daoSession.getLikedRecipeDao().queryBuilder().orderDesc(LikedRecipeDao.Properties.Id).limit(1).list();
-            }
-        });
-    }
-
-    @Override
-    public Observable<Boolean> deleteLikedRecipe(final LikedRecipe likedRecipe) {
-        return Observable.fromCallable(new Callable<Boolean>() {
-            @Override
-            public Boolean call() throws Exception {
-                daoSession.getLikedRecipeDao().deleteByKey(likedRecipe.getId());
-                return true;
-            }
-        });
+    public Flowable<List<LikedRecipe>> getLastInsertedLikedRecipe() {
+        return recipeDatabase.likedRecipeDao().getLastInsertedLikedRecipe();
     }
 }

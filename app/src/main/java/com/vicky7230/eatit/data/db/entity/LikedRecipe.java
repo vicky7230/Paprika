@@ -1,50 +1,36 @@
-package com.vicky7230.eatit.data.db.model;
+package com.vicky7230.eatit.data.db.entity;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 /**
  * Created by agrim on 21/7/17.
  */
 
-@Entity
+@Entity(tableName = "liked_recipes")
 public class LikedRecipe {
 
-    @Id(autoincrement = true)
-    @Property(nameInDb = "id")
+    @PrimaryKey(autoGenerate = true)
     private Long id;
 
-    @Property(nameInDb = "recipe_id")
+    @ColumnInfo(name = "recipe_id")
     private String recipeId;
 
-    @Property(nameInDb = "title")
+    @ColumnInfo(name = "title")
     private String title;
 
-    @Property(nameInDb = "image_url")
+    @ColumnInfo(name = "image_url")
     private String imageUrl;
 
-    @Property(nameInDb = "source_url")
+    @ColumnInfo(name = "source_url")
     private String sourceUrl;
 
-    @Generated(hash = 1921031656)
-    public LikedRecipe(Long id, String recipeId, String title, String imageUrl,
-            String sourceUrl) {
-        this.id = id;
+    public LikedRecipe(String recipeId, String title, String imageUrl, String sourceUrl) {
         this.recipeId = recipeId;
         this.title = title;
         this.imageUrl = imageUrl;
         this.sourceUrl = sourceUrl;
-    }
-
-    public LikedRecipe(String recipeId, String title, String imageUrl,
-                       String sourceUrl) {
-        this.recipeId = recipeId;
-        this.title = title;
-        this.imageUrl = imageUrl;
-        this.sourceUrl = sourceUrl;
-    }
-
-    @Generated(hash = 6385484)
-    public LikedRecipe() {
     }
 
     public Long getId() {

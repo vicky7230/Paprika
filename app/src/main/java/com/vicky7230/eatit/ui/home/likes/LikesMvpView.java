@@ -1,6 +1,6 @@
 package com.vicky7230.eatit.ui.home.likes;
 
-import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.db.entity.LikedRecipe;
 import com.vicky7230.eatit.ui.base.MvpView;
 
 import java.util.List;
