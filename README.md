@@ -12,6 +12,13 @@
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/2.png" width="250">
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/3.png" width="250">
 </p>
+
+### Beautiful animations using RecyclerView ItemAnimator
+
+<p align="center">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/4.gif" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/5.gif" width="250">
+</p>
 <br>
 
 # Architecture Blueprint
