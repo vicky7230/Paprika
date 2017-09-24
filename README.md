@@ -1,5 +1,5 @@
 # Paprika
-
+[![License](https://img.shields.io/badge/LICENSE-Apache%20License%202.0-green.svg)](https://github.com/vicky7230/Paprika/blob/master/LICENSE)
 <!-- ![alt text](https://github.com/vicky7230/Paprika/blob/master/app/src/main/res/mipmap-xhdpi/ic_launcher.png "Logo")
 <br>
  -->
@@ -13,7 +13,8 @@
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/3.png" width="250">
 </p>
 
-### Beautiful animations using RecyclerView ItemAnimator
+#### Beautiful animations using RecyclerView ItemAnimator
+[ItemAnimator Code](https://www.google.com)
 
 <p align="center">
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/4.gif" width="250">
@@ -45,3 +46,20 @@
 8. Glide: https://github.com/bumptech/glide
 9. Okhttp3: https://github.com/square/okhttp
 10. Gson: https://github.com/google/gson
+
+### License
+```
+   Copyright (C) 2017 VIPIN KUMAR
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+```
