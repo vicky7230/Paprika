@@ -5,10 +5,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.subjects.PublishSubject;
 
-/**
- * Created by vicky on 6/8/17.
- */
-
 public final class RxBus {
 
     private static PublishSubject<Object> publishSubject = PublishSubject.create();

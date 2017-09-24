@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
@@ -24,6 +25,10 @@ android {
     configurations.all {
         resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.2'
     }
+}
+
+greendao {
+    schemaVersion 1
 }
 
 dependencies {
@@ -52,7 +57,7 @@ dependencies {
     implementation "com.joanzapata.iconify:android-iconify-material:$rootProject.iconifyVersion"
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
-    //implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
+    implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"
@@ -65,7 +70,4 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     debugImplementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stethoVersion"
-    implementation "android.arch.persistence.room:runtime:$rootProject.room"
-    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.room"
-    implementation "android.arch.persistence.room:rxjava2:$rootProject.room"
 }

@@ -2,13 +2,10 @@ package com.vicky7230.eatit.ui.home.likes;
 
 import android.support.v7.util.DiffUtil;
 
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 
 import java.util.List;
 
-/**
- * Created by agrim on 4/9/17.
- */
 
 public class LikedRecipeDiffUtilCallback extends DiffUtil.Callback {
 

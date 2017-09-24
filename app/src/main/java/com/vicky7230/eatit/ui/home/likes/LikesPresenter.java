@@ -1,10 +1,11 @@
 package com.vicky7230.eatit.ui.home.likes;
 
 import com.vicky7230.eatit.data.DataManager;
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.rxBus.RxBus;
 import com.vicky7230.eatit.rxBus.events.LikesUpdatedEvent;
 import com.vicky7230.eatit.ui.base.BasePresenter;
+
 
 import java.util.List;
 
@@ -16,10 +17,6 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-/**
- * Created by agrim on 29/7/17.
- */
-
 public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> implements LikesMvpPresenter<V> {
 
     @Inject
@@ -30,8 +27,10 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
             @Override
             public void accept(Object o) throws Exception {
 
-                if (o instanceof LikesUpdatedEvent)
+                if (o instanceof LikesUpdatedEvent) {
                     loadLastInsertedFavouriteRecipe();
+                    Timber.d("count" );
+                }
             }
         });
     }
@@ -71,8 +70,7 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
                     @Override
                     public void accept(List<LikedRecipe> likedRecipeList) throws Exception {
                         if (likedRecipeList != null)
-                            Timber.d("count : " + likedRecipeList.size());
-                        getMvpView().updateFavouriteRecipeList(likedRecipeList);
+                            getMvpView().updateFavouriteRecipeList(likedRecipeList);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

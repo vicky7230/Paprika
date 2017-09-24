@@ -1,7 +1,7 @@
 package com.vicky7230.eatit.ui.home.recipes;
 
 import com.vicky7230.eatit.data.DataManager;
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.data.network.model.recipes.Recipes;
 import com.vicky7230.eatit.data.network.model.singleRecipe.SingleRecipe;
@@ -10,10 +10,11 @@ import com.vicky7230.eatit.rxBus.events.LikesUpdatedEvent;
 import com.vicky7230.eatit.ui.base.BasePresenter;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import javax.inject.Inject;
 
-import io.reactivex.Flowable;
+import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
@@ -22,8 +23,8 @@ import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
-public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V> implements
-        RecipesMvpPresenter<V> {
+
+public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V> implements RecipesMvpPresenter<V> {
 
     private int page = 1;
 
@@ -41,13 +42,12 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
     public void fetchRecipes() {
         getCompositeDisposable().add(getDataManager()
                 .getRecipes(String.valueOf(page))
-                .subscribeOn(Schedulers.io())
                 .map(new Function<Recipes, Recipes>() {
                     @Override
                     public Recipes apply(@NonNull Recipes recipes) throws Exception {
                         if (recipes != null && recipes.getRecipes() != null) {
                             for (Recipe recipe : recipes.getRecipes()) {
-                                if (getDataManager().checkIfRecipeIsLiked(recipe).size() > 0) {
+                                if (getDataManager().checkIfRecipeIsLiked(recipe)) {
                                     recipe.setLiked(true);
                                 } else {
                                     recipe.setLiked(false);
@@ -57,6 +57,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         return recipes;
                     }
                 })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Recipes>() {
                     @Override
@@ -102,10 +103,12 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         Timber.e(throwable);
                     }
                 }));
+
     }
 
-    private void insertLikedRecipe(Recipe recipe) {
-        Flowable<Long> longFlowable = getDataManager().insertLikedRecipe(
+    private void insertLikedRecipe(final Recipe recipe) {
+
+        Observable<Long> longObservable = getDataManager().insertLikedRecipe(
                 new LikedRecipe(
                         recipe.getRecipeId(),
                         recipe.getTitle(),
@@ -113,7 +116,7 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         recipe.getSourceUrl()
                 )
         );
-        getCompositeDisposable().add(longFlowable
+        getCompositeDisposable().add(longObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Long>() {
@@ -138,8 +141,6 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
 
         getMvpView().showLoading();
         getCompositeDisposable().add(getDataManager().getRecipe(recipeId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<SingleRecipe, SingleRecipe>() {
                     @Override
                     public SingleRecipe apply(@NonNull SingleRecipe singleRecipe) throws Exception {
@@ -154,6 +155,8 @@ public class RecipesPresenter<V extends RecipesMvpView> extends BasePresenter<V>
                         return singleRecipe;
                     }
                 })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<SingleRecipe>() {
                     @Override
                     public void accept(SingleRecipe singleRecipe) throws Exception {

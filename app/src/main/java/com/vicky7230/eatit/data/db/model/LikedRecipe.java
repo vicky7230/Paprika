@@ -1,29 +1,27 @@
-package com.vicky7230.eatit.data.db.entity;
+package com.vicky7230.eatit.data.db.model;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.annotation.Generated;
 
-/**
- * Created by agrim on 21/7/17.
- */
-
-@Entity(tableName = "liked_recipes")
+@Entity(nameInDb = "liked_recipes")
 public class LikedRecipe {
 
-    @PrimaryKey(autoGenerate = true)
+    @Id(autoincrement = true)
+    @Property(nameInDb = "id")
     private Long id;
 
-    @ColumnInfo(name = "recipe_id")
+    @Property(nameInDb = "recipe_id")
     private String recipeId;
 
-    @ColumnInfo(name = "title")
+    @Property(nameInDb = "title")
     private String title;
 
-    @ColumnInfo(name = "image_url")
+    @Property(nameInDb = "image_url")
     private String imageUrl;
 
-    @ColumnInfo(name = "source_url")
+    @Property(nameInDb = "source_url")
     private String sourceUrl;
 
     public LikedRecipe(String recipeId, String title, String imageUrl, String sourceUrl) {
@@ -31,6 +29,20 @@ public class LikedRecipe {
         this.title = title;
         this.imageUrl = imageUrl;
         this.sourceUrl = sourceUrl;
+    }
+
+    @Generated(hash = 1921031656)
+    public LikedRecipe(Long id, String recipeId, String title, String imageUrl,
+            String sourceUrl) {
+        this.id = id;
+        this.recipeId = recipeId;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.sourceUrl = sourceUrl;
+    }
+
+    @Generated(hash = 6385484)
+    public LikedRecipe() {
     }
 
     public Long getId() {

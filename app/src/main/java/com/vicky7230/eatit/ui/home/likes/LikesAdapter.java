@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.ui.base.BaseViewHolder;
 import com.vicky7230.eatit.utils.GlideApp;
 
@@ -23,10 +23,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
-
-/**
- * Created by vicky on 25/6/17.
- */
 
 public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 

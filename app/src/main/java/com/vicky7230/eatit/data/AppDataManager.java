@@ -1,7 +1,7 @@
 package com.vicky7230.eatit.data;
 
 import com.vicky7230.eatit.data.db.DbHelper;
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 import com.vicky7230.eatit.data.network.ApiHelper;
 import com.vicky7230.eatit.data.network.model.imagga.content.Content;
 import com.vicky7230.eatit.data.network.model.imagga.tag.Tags;
@@ -14,7 +14,6 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -52,28 +51,32 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public List<LikedRecipe> checkIfRecipeIsLiked(Recipe recipe) {
+    public Boolean checkIfRecipeIsLiked(Recipe recipe) {
         return dbHelper.checkIfRecipeIsLiked(recipe);
     }
 
     @Override
-    public Flowable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe) {
+    public Observable<List<LikedRecipe>> checkIfRecipeIsAlreadyLiked(Recipe recipe) {
         return dbHelper.checkIfRecipeIsAlreadyLiked(recipe);
     }
 
     @Override
-    public Flowable<Long> insertLikedRecipe(LikedRecipe likedRecipe) {
+    public Observable<Long> insertLikedRecipe(LikedRecipe likedRecipe) {
         return dbHelper.insertLikedRecipe(likedRecipe);
     }
 
     @Override
-    public Flowable<List<LikedRecipe>> getAllLikedRecipes() {
+    public Observable<List<LikedRecipe>> getAllLikedRecipes() {
         return dbHelper.getAllLikedRecipes();
     }
 
     @Override
-    public Flowable<List<LikedRecipe>> getLastInsertedLikedRecipe() {
+    public Observable<List<LikedRecipe>> getLastInsertedLikedRecipe() {
         return dbHelper.getLastInsertedLikedRecipe();
     }
 
+    @Override
+    public Observable<Boolean> deleteLikedRecipe(LikedRecipe likedRecipe) {
+        return dbHelper.deleteLikedRecipe(likedRecipe);
+    }
 }

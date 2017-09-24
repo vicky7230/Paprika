@@ -2,7 +2,8 @@ package com.vicky7230.eatit.ui.home.likes;
 
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.vicky7230.eatit.data.db.entity.LikedRecipe;
+
+import com.vicky7230.eatit.data.db.model.LikedRecipe;
 
 import java.util.ArrayList;
 
