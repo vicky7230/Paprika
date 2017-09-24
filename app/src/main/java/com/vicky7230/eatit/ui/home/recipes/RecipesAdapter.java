@@ -29,7 +29,6 @@ import butterknife.ButterKnife;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-
 public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public static final String ACTION_LIKE_BUTTON_CLICKED = "action_like_button_button";

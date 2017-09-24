@@ -5,10 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 
-/**
- * Created by agrim on 12/8/17.
- */
-
 public class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
     private int offset;
 

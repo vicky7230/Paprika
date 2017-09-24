@@ -31,6 +31,10 @@
 1. RxJava2: https://github.com/ReactiveX/RxAndroid
 2. Dagger2: https://github.com/google/dagger
 3. Retrofit2: https://github.com/square/retrofit
-6. Calligraphy: https://github.com/chrisjenx/Calligraphy
-7. GreenDao: http://greenrobot.org/greendao/
-8. ButterKnife: http://jakewharton.github.io/butterknife/
+4. Calligraphy: https://github.com/chrisjenx/Calligraphy
+5. GreenDao: http://greenrobot.org/greendao
+6. ButterKnife: http://jakewharton.github.io/butterknife
+7. Timber: https://github.com/JakeWharton/timber
+8. Glide: https://github.com/bumptech/glide
+9. Okhttp3: https://github.com/square/okhttp
+10. Gson: https://github.com/google/gson

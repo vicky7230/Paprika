@@ -6,10 +6,6 @@ import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 
 import java.util.List;
 
-/**
- * Created by agrim on 4/9/17.
- */
-
 public class RecipeDiffUtilCallback extends DiffUtil.Callback {
 
     private List<Recipe> oldRecipeList;
