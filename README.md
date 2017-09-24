@@ -1,5 +1,5 @@
 # Paprika
-[![License](https://img.shields.io/badge/LICENSE-Apache%20License%202.0-green.svg)](https://github.com/vicky7230/Paprika/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/LICENSE-Apache%20License%202.0-blue.svg)](https://github.com/vicky7230/Paprika/blob/master/LICENSE)
 <!-- ![alt text](https://github.com/vicky7230/Paprika/blob/master/app/src/main/res/mipmap-xhdpi/ic_launcher.png "Logo")
 <br>
  -->
@@ -14,7 +14,7 @@
 </p>
 
 #### Beautiful animations using RecyclerView ItemAnimator
-[ItemAnimator Code](https://www.google.com)
+[ItemAnimator Code](https://github.com/vicky7230/Paprika/blob/master/app/src/main/java/com/vicky7230/eatit/ui/home/recipes/RecipesItemAnimator.java)
 
 <p align="center">
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/4.gif" width="250">
