@@ -21,10 +21,6 @@ import dagger.Module;
 import dagger.Provides;
 import io.reactivex.disposables.CompositeDisposable;
 
-/**
- * Created by vicky on 25/6/17.
- */
-
 @Module
 public class ApplicationModule {
 

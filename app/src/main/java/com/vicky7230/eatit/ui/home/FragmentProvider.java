@@ -9,11 +9,6 @@ import com.vicky7230.eatit.ui.home.recipes.RecipesModule;
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
-/**
- * Created by vipin on 17/9/17.
- */
-
-
 @Module
 public abstract class FragmentProvider {
 

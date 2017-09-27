@@ -40,8 +40,13 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Observable<SingleRecipe> getRecipe(String rId) {
-        return recipeService.getRecipe(Config.RECIPES_API_KEY, rId);
+    public Observable<SingleRecipe> getRecipe(String recipeId) {
+        return recipeService.getRecipe(Config.RECIPES_API_KEY, recipeId);
+    }
+
+    @Override
+    public Observable<Recipes> searchRecipes(String query, String page) {
+        return recipeService.searchRecipes(Config.RECIPES_API_KEY, query, page);
     }
 
     @Override

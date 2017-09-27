@@ -50,6 +50,7 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
+        presenter.onAttach(this);
         init();
     }
 

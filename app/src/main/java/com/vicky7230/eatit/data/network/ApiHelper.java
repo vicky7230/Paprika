@@ -15,9 +15,11 @@ import okhttp3.RequestBody;
 
 public interface ApiHelper {
 
-    Observable<Recipes> getRecipes(String p);
+    Observable<Recipes> getRecipes(String page);
 
     Observable<SingleRecipe> getRecipe(String rId);
+
+    Observable<Recipes> searchRecipes(String query, String page);
 
     Observable<Content> uploadImage(RequestBody name, MultipartBody.Part body);
 

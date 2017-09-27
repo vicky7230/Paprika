@@ -26,4 +26,12 @@ public interface RecipeService {
             @Query("rId") String rId
     );
 
+
+    @GET("search")
+    Observable<Recipes> searchRecipes(
+            @Query("key") String key,
+            @Query("q") String query,
+            @Query("page") String page
+    );
+
 }

@@ -41,6 +41,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<Recipes> searchRecipes(String query, String page) {
+        return apiHelper.searchRecipes(query, page);
+    }
+
+    @Override
     public Observable<Content> uploadImage(RequestBody name, MultipartBody.Part body) {
         return apiHelper.uploadImage(name, body);
     }

@@ -70,4 +70,5 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
     debugImplementation "com.facebook.stetho:stetho:$rootProject.stethoVersion"
     debugImplementation "com.facebook.stetho:stetho-okhttp3:$rootProject.stethoVersion"
+    implementation "com.jakewharton.rxbinding2:rxbinding-appcompat-v7:$rootProject.rxBindings"
 }
