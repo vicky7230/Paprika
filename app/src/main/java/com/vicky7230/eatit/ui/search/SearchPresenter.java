@@ -12,6 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -31,7 +32,6 @@ public class SearchPresenter<V extends SearchMvpView> extends BasePresenter<V> i
         super(dataManager, compositeDisposable);
     }
 
-
     @Override
     public void instantSearch(AppCompatEditText appCompatEditText) {
 
@@ -43,10 +43,10 @@ public class SearchPresenter<V extends SearchMvpView> extends BasePresenter<V> i
                         return textViewAfterTextChangeEvent.editable() != null && textViewAfterTextChangeEvent.editable().toString().length() > 3;
                     }
                 })
-                .flatMap(new Function<TextViewAfterTextChangeEvent, ObservableSource<Recipes>>() {
+                .switchMap(new Function<TextViewAfterTextChangeEvent, ObservableSource<Recipes>>() {
                     @Override
                     public ObservableSource<Recipes> apply(TextViewAfterTextChangeEvent textViewAfterTextChangeEvent) throws Exception {
-                        return getDataManager().searchRecipes(textViewAfterTextChangeEvent.editable().toString(), "1");
+                        return getDataManager().searchRecipes(textViewAfterTextChangeEvent.editable().toString(), "1").onErrorResumeNext(Observable.<Recipes>empty());
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -54,8 +54,10 @@ public class SearchPresenter<V extends SearchMvpView> extends BasePresenter<V> i
                     @Override
                     public void accept(Recipes recipes) throws Exception {
                         if (recipes != null && recipes.getRecipes() != null) {
-                            Timber.d(recipes.getCount().toString());
-                            getMvpView().reFreshRecipeList(recipes.getRecipes());
+                            if (!Thread.currentThread().isInterrupted()) {
+                                Timber.d(recipes.getCount().toString());
+                                getMvpView().reFreshRecipeList(recipes.getRecipes());
+                            }
                         }
                     }
                 }, new Consumer<Throwable>() {
