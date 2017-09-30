@@ -157,6 +157,7 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         super.onViewRecycled(holder);
         if (holder instanceof RecipeViewHolder) {
             ((RecipeViewHolder) holder).recipeTitleTextView.setText("");
+            ((RecipeViewHolder) holder).publisherTextView.setText("");
         }
     }
 
@@ -175,6 +176,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         @BindView(R.id.recipe_title)
         AppCompatTextView recipeTitleTextView;
+        @BindView(R.id.publisher)
+        AppCompatTextView publisherTextView;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
@@ -185,6 +188,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             Recipe recipe = recipeList.get(position);
             if (recipe.getTitle() != null)
                 recipeTitleTextView.setText(recipe.getTitle());
+            if (recipe.getPublisher() != null)
+                publisherTextView.setText(recipe.getPublisher());
         }
     }
 

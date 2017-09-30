@@ -5,6 +5,8 @@ import com.vicky7230.eatit.ui.home.HomeActivity;
 import com.vicky7230.eatit.ui.home.HomeActivityModule;
 import com.vicky7230.eatit.ui.search.SearchActivity;
 import com.vicky7230.eatit.ui.search.SearchActivityModule;
+import com.vicky7230.eatit.ui.splash.SplashActivity;
+import com.vicky7230.eatit.ui.splash.SplashActivityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -21,5 +23,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = SearchActivityModule.class)
     abstract SearchActivity bindSearchActivity();
+
+    @ContributesAndroidInjector(modules = SplashActivityModule.class)
+    abstract SplashActivity bindSplashActivity();
 
 }

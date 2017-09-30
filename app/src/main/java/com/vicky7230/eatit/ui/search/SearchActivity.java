@@ -62,4 +62,10 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDetach();
+        super.onDestroy();
+    }
 }

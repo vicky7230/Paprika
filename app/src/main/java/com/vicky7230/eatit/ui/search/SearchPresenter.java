@@ -37,27 +37,30 @@ public class SearchPresenter<V extends SearchMvpView> extends BasePresenter<V> i
 
         getCompositeDisposable().add(RxTextView.afterTextChangeEvents(appCompatEditText)
                 .debounce(QUERY_UPDATE_DELAY_MILLIS, TimeUnit.MILLISECONDS)
+                .observeOn(Schedulers.io())
                 .filter(new Predicate<TextViewAfterTextChangeEvent>() {
                     @Override
                     public boolean test(TextViewAfterTextChangeEvent textViewAfterTextChangeEvent) throws Exception {
-                        return textViewAfterTextChangeEvent.editable() != null && textViewAfterTextChangeEvent.editable().toString().length() > 3;
+                        return textViewAfterTextChangeEvent.editable() != null &&
+                                textViewAfterTextChangeEvent.editable().toString().length() > 3;
                     }
                 })
                 .switchMap(new Function<TextViewAfterTextChangeEvent, ObservableSource<Recipes>>() {
                     @Override
                     public ObservableSource<Recipes> apply(TextViewAfterTextChangeEvent textViewAfterTextChangeEvent) throws Exception {
-                        return getDataManager().searchRecipes(textViewAfterTextChangeEvent.editable().toString(), "1").onErrorResumeNext(Observable.<Recipes>empty());
+                        return getDataManager()
+                                .searchRecipes(textViewAfterTextChangeEvent.editable().toString(), "1");
+                        //.onErrorResumeNext(Observable.<Recipes>empty());
                     }
-                }).subscribeOn(Schedulers.io())
+                })
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Recipes>() {
                     @Override
                     public void accept(Recipes recipes) throws Exception {
                         if (recipes != null && recipes.getRecipes() != null) {
-                            if (!Thread.currentThread().isInterrupted()) {
-                                Timber.d(recipes.getCount().toString());
-                                getMvpView().reFreshRecipeList(recipes.getRecipes());
-                            }
+                            Timber.d(recipes.getCount().toString());
+                            getMvpView().reFreshRecipeList(recipes.getRecipes());
                         }
                     }
                 }, new Consumer<Throwable>() {

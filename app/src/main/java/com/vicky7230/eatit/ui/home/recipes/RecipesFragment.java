@@ -146,28 +146,6 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     }
 
     @Override
-    public void showIngredients(List<String> ingredients) {
-
-        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.ingredients_list_view, null, false);
-        ((TextView) view.findViewById(R.id.title)).setText(R.string.ingredients);
-        ListView listView = (ListView) view.findViewById(R.id.ingredients_list);
-        listView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.ingredients_list_item, ingredients));
-
-        Dialog dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(view);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme; //style id
-        dialog.show();
-    }
-
-    @Override
-    public void onDestroyView() {
-        presenter.onDetach();
-        super.onDestroyView();
-    }
-
-    @Override
     public void onLikeRecipeClick(int position) {
         presenter.likeTheRecipe(recipesAdapter.getItem(position));
     }
@@ -191,8 +169,30 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
         presenter.getSingleRecipe(recipeId);
     }
 
+    @Override
+    public void showIngredients(List<String> ingredients) {
+
+        LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = layoutInflater.inflate(R.layout.ingredients_list_view, null, false);
+        ((TextView) view.findViewById(R.id.title)).setText(R.string.ingredients);
+        ListView listView = (ListView) view.findViewById(R.id.ingredients_list);
+        listView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.ingredients_list_item, ingredients));
+
+        Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(view);
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme; //style id
+        dialog.show();
+    }
+
     @OnClick(R.id.fab)
     public void openSearchActivity() {
         startActivity(new Intent(getContext(), SearchActivity.class));
+    }
+
+    @Override
+    public void onDestroyView() {
+        presenter.onDetach();
+        super.onDestroyView();
     }
 }

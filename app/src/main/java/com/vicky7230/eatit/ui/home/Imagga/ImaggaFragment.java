@@ -187,4 +187,10 @@ public class ImaggaFragment extends BaseFragment implements ImaggaMvpView {
                     });
         }
     }
+
+    @Override
+    public void onDestroyView() {
+        presenter.onDetach();
+        super.onDestroyView();
+    }
 }

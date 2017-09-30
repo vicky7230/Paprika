@@ -91,4 +91,10 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return fragmentDispatchingAndroidInjector;
     }
+
+    @Override
+    protected void onDestroy() {
+        presenter.onDetach();
+        super.onDestroy();
+    }
 }
