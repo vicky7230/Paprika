@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.ui.base.BaseActivity;
@@ -32,16 +33,23 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
     TabLayout tabLayout;
 
     private final int[] TAB_ICONS_UNSELECTED = {
-            R.drawable.ic_recipes_green_24dp,
-            R.drawable.ic_camera_green_24dp,
-            R.drawable.ic_likes_green_24dp,
-            R.drawable.ic_settings_green_24dp
+            R.drawable.ic_recipes_unselected_24dp,
+            R.drawable.ic_camera_unselected_24dp,
+            R.drawable.ic_likes_unselected_24dp,
+            R.drawable.ic_settings_unselected_24dp
     };
     private final int[] TAB_ICONS_SELECTED = {
-            R.drawable.ic_recipes_white_24dp,
-            R.drawable.ic_camera_white_24dp,
-            R.drawable.ic_likes_white_24dp,
-            R.drawable.ic_settings_white_24dp
+            R.drawable.ic_recipes_selected_24dp,
+            R.drawable.ic_camera_selected_24dp,
+            R.drawable.ic_likes_selected_24dp,
+            R.drawable.ic_settings_selected_24dp
+    };
+
+    private final int[] TAB_INDICATORS = {
+            R.id.tab_indicator_1,
+            R.id.tab_indicator_2,
+            R.id.tab_indicator_3,
+            R.id.tab_indicator_4
     };
 
     @Override
@@ -66,11 +74,17 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
             @Override
             public void onPageSelected(int position) {
-                for (int i = 0; i < tabLayout.getTabCount(); ++i)
+                for (int i = 0; i < tabLayout.getTabCount(); ++i) {
                     tabLayout.getTabAt(i).setIcon(
                             i != position ?
                                     TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
                     );
+
+                    if (i == position)
+                        findViewById(TAB_INDICATORS[i]).setVisibility(View.VISIBLE);
+                    else
+                        findViewById(TAB_INDICATORS[i]).setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -80,11 +94,17 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
         });
 
         tabLayout.setupWithViewPager(viewPager);
-        for (int i = 0; i < tabLayout.getTabCount(); ++i)
+        for (int i = 0; i < tabLayout.getTabCount(); ++i) {
             tabLayout.getTabAt(i).setIcon(
                     i != viewPager.getCurrentItem() ?
                             TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
             );
+
+            if (i == viewPager.getCurrentItem())
+                findViewById(TAB_INDICATORS[i]).setVisibility(View.VISIBLE);
+            else
+                findViewById(TAB_INDICATORS[i]).setVisibility(View.GONE);
+        }
     }
 
     @Override

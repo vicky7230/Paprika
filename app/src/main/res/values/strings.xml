@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Paprika</string>
     <string name="recipes">Recipes</string>
-    <string name="search">Search</string>
+    <string name="search">Search for recipes</string>
     <string name="left_overs">Left Overs</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

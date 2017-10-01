@@ -2,9 +2,11 @@ package com.vicky7230.eatit.ui.search;
 
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
+import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
@@ -16,6 +18,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.android.AndroidInjection;
 
 public class SearchActivity extends BaseActivity implements SearchMvpView {
@@ -27,6 +30,10 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
     @Inject
     SearchAdapter searchAdapter;
 
+    @BindView(R.id.back_image_view)
+    AppCompatImageView backImageView;
+    @BindView(R.id.clear_image_view)
+    AppCompatImageView clearImageView;
     @BindView(R.id.search_edit_text)
     AppCompatEditText searchEditText;
     @BindView(R.id.search_recycler_view)
@@ -40,6 +47,16 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
         ButterKnife.bind(this);
         presenter.onAttach(this);
         init();
+    }
+
+    @OnClick(R.id.back_image_view)
+    public void goBack(View view) {
+        finish();
+    }
+
+    @OnClick(R.id.clear_image_view)
+    public void clearSearchText(View view) {
+        searchEditText.setText("");
     }
 
     private void init() {

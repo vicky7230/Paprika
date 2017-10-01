@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#88C057</color>
+    <color name="colorPrimary">#59c73e</color>
     <color name="colorRedError">#f72f3c</color>
-    <color name="colorPrimaryDark">#4a801a</color>
+    <color name="colorPrimaryDark">#59c73e</color>
     <color name="colorAccent">#000000</color>
     <color name="colorGrayDefault">#747474</color>
+    <color name="tab_unselected">#d5dce4</color>
 </resources>

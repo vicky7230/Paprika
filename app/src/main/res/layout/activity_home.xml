@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,14 +15,70 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:elevation="4dp"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:tabGravity="fill"
+            app:tabIndicatorColor="@color/colorPrimary"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
             app:tabTextColor="@android:color/white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/tab_indicator_1"
+                    android:layout_width="24dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/tab_indicator_2"
+                    android:layout_width="24dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/tab_indicator_3"
+                    android:layout_width="24dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <View
+                    android:id="@+id/tab_indicator_4"
+                    android:layout_width="24dp"
+                    android:layout_height="3dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary" />
+            </FrameLayout>
+        </LinearLayout>
 
         <android.support.v4.view.ViewPager
             android:id="@+id/view_pager"
