@@ -17,15 +17,14 @@
 
             <com.joanzapata.iconify.widget.IconTextView
                 android:id="@+id/clicked_image"
-                android:text="{md-camera 220dp @color/colorPrimary}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:gravity="center"
-                android:layout_gravity="center_horizontal" />
+                android:text="{md-camera 220dp @color/colorPrimary}" />
 
             <TextView
                 android:id="@+id/camera_text"
-                fontPath="fonts/OpenSans-SemiBold.ttf"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"

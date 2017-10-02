@@ -31,7 +31,6 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/recipe_title"
-                fontPath="fonts/OpenSans-SemiBold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -43,7 +42,6 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/publisher"
-                fontPath="fonts/OpenSans-SemiBold.ttf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"

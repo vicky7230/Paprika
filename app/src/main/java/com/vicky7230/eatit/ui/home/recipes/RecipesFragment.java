@@ -74,7 +74,7 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
 
         recipesRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         recipesRecyclerView.setItemAnimator(new RecipesItemAnimator());
-        recipesRecyclerView.addItemDecoration(new ItemOffsetDecoration(15));
+        recipesRecyclerView.addItemDecoration(new ItemOffsetDecoration(40));
         recipesRecyclerView.setAdapter(recipesAdapter);
         recipesRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
@@ -173,7 +173,7 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     public void showIngredients(List<String> ingredients) {
 
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = layoutInflater.inflate(R.layout.ingredients_list_view, null, false);
+        View view = layoutInflater.inflate(R.layout.ingredients_dialog_view, null, false);
         ((TextView) view.findViewById(R.id.title)).setText(R.string.ingredients);
         ListView listView = (ListView) view.findViewById(R.id.ingredients_list);
         listView.setAdapter(new ArrayAdapter<>(getActivity(), R.layout.ingredients_list_item, ingredients));

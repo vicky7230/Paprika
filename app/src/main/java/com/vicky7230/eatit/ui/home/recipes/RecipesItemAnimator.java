@@ -113,7 +113,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
         scaleLikeIcon.setInterpolator(DECELERATE_INTERPOLATOR);
         scaleLikeIcon.setDuration(1000);
 
-        ObjectAnimator scaleLikeBackground = ObjectAnimator.ofPropertyValuesHolder(holder.itemView, PropertyValuesHolder.ofFloat("scaleX", 1.0f, 0.95f, 1.0f), PropertyValuesHolder.ofFloat("scaleY", 1.0f, 0.95f, 1.0f));
+        ObjectAnimator scaleLikeBackground = ObjectAnimator.ofPropertyValuesHolder(holder.recipeImageCardView, PropertyValuesHolder.ofFloat("scaleX", 1.0f, 0.95f, 1.0f), PropertyValuesHolder.ofFloat("scaleY", 1.0f, 0.95f, 1.0f));
         scaleLikeBackground.setInterpolator(DECELERATE_INTERPOLATOR);
         scaleLikeBackground.setDuration(600);
 

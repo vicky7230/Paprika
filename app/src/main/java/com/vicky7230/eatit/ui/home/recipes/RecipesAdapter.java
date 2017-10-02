@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -116,7 +118,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private RecyclerView.ViewHolder createRecipeViewHolder(ViewGroup parent) {
         final RecipeViewHolder recipeViewHolder = new RecipeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false));
 
-        recipeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+        recipeViewHolder.recipeImageCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final Recipe recipe = getItem(recipeViewHolder.getAdapterPosition());
@@ -242,18 +244,20 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.recipe_image_card)
+        CardView recipeImageCardView;
         @BindView(R.id.recipe_title)
         TextView recipeTitleTextView;
         @BindView(R.id.recipe_image)
-        ImageView recipeImageView;
+        AppCompatImageView recipeImageView;
         @BindView(R.id.image_view_like)
-        ImageView imageViewLike;
+        AppCompatImageView imageViewLike;
         @BindView(R.id.like_button)
-        ImageView likeButton;
+        AppCompatImageView likeButton;
         @BindView(R.id.share_button)
-        ImageView shareButton;
+        AppCompatImageView shareButton;
         @BindView(R.id.ingredients_button)
-        ImageView ingredientsButton;
+        AppCompatImageView ingredientsButton;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
@@ -270,7 +274,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 GlideApp.with(itemView.getContext())
                         .load(recipe.getImageUrl())
                         .transition(withCrossFade())
-                        .dontTransform()
+                        .centerCrop()
                         .into(recipeImageView);
 
             if (recipe.getLiked()) {
