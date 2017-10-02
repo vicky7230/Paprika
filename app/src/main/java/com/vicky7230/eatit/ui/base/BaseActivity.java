@@ -9,6 +9,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.vicky7230.eatit.utils.CommonUtils;
 
@@ -29,21 +30,25 @@ public class BaseActivity extends AppCompatActivity implements MvpView {
     }
 
     private void displayMessage(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        /*Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
         //snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimary));
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-        snackbar.show();
+        snackbar.show();*/
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void displayError(String message) {
-        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
+        /*Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View snackBarView = snackbar.getView();
         //snackBarView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorRedError));
         TextView textView = snackBarView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, android.R.color.white));
-        snackbar.show();
+        snackbar.show();*/
+
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

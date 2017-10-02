@@ -99,7 +99,7 @@ public class BasePresenter<V extends MvpView> implements MvpPresenter<V> {
             errorMessage = "Some Error";
         }*/
 
-        getMvpView().showError(throwable.getMessage());
+        getMvpView().showError(throwable.getLocalizedMessage().split(":")[0]);
 
     }
 

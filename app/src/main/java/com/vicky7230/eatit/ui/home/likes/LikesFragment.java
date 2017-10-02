@@ -71,7 +71,7 @@ public class LikesFragment extends BaseFragment implements LikesMvpView, LikesAd
         staggeredGridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         favouritesRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         favouritesRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        favouritesRecyclerView.addItemDecoration(new ItemOffsetDecoration(15));
+        favouritesRecyclerView.addItemDecoration(new ItemOffsetDecoration(40));
         favouritesRecyclerView.setAdapter(likesAdapter);
 
         presenter.loadAllFavouriteRecipes();

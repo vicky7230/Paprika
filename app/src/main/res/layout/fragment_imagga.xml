@@ -1,55 +1,46 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/clicked_image"
+        android:layout_width="220dp"
+        android:layout_height="220dp"
+        android:layout_above="@id/camera_text"
+        android:layout_centerHorizontal="true"
+        app:srcCompat="@drawable/ic_camera_24dp"
+        android:layout_gravity="center_horizontal" />
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/clicked_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="{md-camera 220dp @color/colorPrimary}" />
+    <TextView
+        android:id="@+id/camera_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/camera_button"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="@string/camera_hint"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/camera_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:gravity="center"
-                android:text="@string/camera_hint"
-                android:textColor="@android:color/black"
-                android:textSize="16sp"
-                tools:ignore="MissingPrefix" />
+    <android.support.v7.widget.AppCompatButton
+        fontPath="fonts/NeologyDecoW01-Medium.ttf"
+        android:id="@+id/camera_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/curved_solid"
+        android:paddingBottom="12dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="12dp"
+        android:text="OPEN CAMERA"
+        android:layout_marginBottom="150dp"
+        android:textColor="@android:color/white"
+        android:textSize="16sp" />
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/camera_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:background="@drawable/curved_black_border"
-                android:clickable="true"
-                android:focusable="true"
-                android:foreground="?attr/selectableItemBackground"
-                android:paddingBottom="10dp"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:paddingTop="10dp"
-                android:text="{md-camera-alt 25sp}    OPEN CAMERA"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</FrameLayout>
+</RelativeLayout>

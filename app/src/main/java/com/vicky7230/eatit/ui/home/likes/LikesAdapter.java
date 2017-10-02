@@ -1,9 +1,11 @@
 package com.vicky7230.eatit.ui.home.likes;
 
 import android.net.Uri;
+import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +15,9 @@ import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.db.model.LikedRecipe;
+import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.ui.base.BaseViewHolder;
+import com.vicky7230.eatit.ui.home.recipes.RecipesAdapter;
 import com.vicky7230.eatit.utils.GlideApp;
 
 import java.util.ArrayList;
@@ -24,7 +28,7 @@ import butterknife.ButterKnife;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class LikesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private List<LikedRecipe> likedRecipeList;
     private Callback callback;
@@ -56,15 +60,30 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        final RecipeViewHolder recipeViewHolder = new RecipeViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_list_item, parent, false));
+        recipeViewHolder.recipeImageCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final LikedRecipe likedRecipe = getItem(recipeViewHolder.getAdapterPosition());
+                if (likedRecipe != null) {
+                    if (likedRecipe.getImageUrl() != null) {
+                        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
+                                .setShowTitle(true)
+                                .setToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.color_primary))
+                                .setSecondaryToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.color_primary_dark))
+                                .build();
+                        customTabsIntent.launchUrl(recipeViewHolder.itemView.getContext(), Uri.parse(likedRecipe.getSourceUrl()));
+                    }
+                }
+            }
+        });
+        return recipeViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(BaseViewHolder holder, int position) {
-
-        holder.onBind(position);
-
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        ((RecipeViewHolder) holder).onBind(position);
     }
 
     @Override
@@ -73,8 +92,10 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     }
 
     public LikedRecipe getItem(int position) {
-
-        return likedRecipeList.get(position);
+        if (position != RecyclerView.NO_POSITION)
+            return likedRecipeList.get(position);
+        else
+            return null;
     }
 
     @Override
@@ -82,9 +103,19 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return likedRecipeList.size();
     }
 
+    @Override
+    public void onViewRecycled(RecyclerView.ViewHolder holder) {
+        super.onViewRecycled(holder);
+        if (holder instanceof RecipeViewHolder) {
+            ((RecipeViewHolder) holder).recipeTitleTextView.setText("");
+            ((RecipeViewHolder) holder).recipeImageView.setImageDrawable(null);
+        }
+    }
 
-    public class ViewHolder extends BaseViewHolder {
+    public class RecipeViewHolder extends RecyclerView.ViewHolder {
 
+        @BindView(R.id.recipe_image_card)
+        CardView recipeImageCardView;
         @BindView(R.id.recipe_title)
         TextView recipeTitleTextView;
         @BindView(R.id.recipe_image)
@@ -92,14 +123,12 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @BindView(R.id.like_button)
         ImageView likeButton;
 
-        public ViewHolder(View itemView) {
+        public RecipeViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        @Override
         public void onBind(final int position) {
-            super.onBind(position);
 
             final LikedRecipe likedRecipe = likedRecipeList.get(position);
 
@@ -110,36 +139,12 @@ public class LikesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                 GlideApp.with(itemView.getContext())
                         .load(likedRecipe.getImageUrl())
                         .transition(withCrossFade())
-                        .dontTransform()
+                        .centerCrop()
                         .into(recipeImageView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    if (likedRecipe.getImageUrl() != null) {
-
-                        CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
-                                .setShowTitle(true)
-                                .setToolbarColor(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimary))
-                                .setSecondaryToolbarColor(ContextCompat.getColor(itemView.getContext(), R.color.colorPrimaryDark))
-                                .build();
-
-                        customTabsIntent.launchUrl(itemView.getContext(), Uri.parse(likedRecipe.getSourceUrl()));
-                    }
-                }
-            });
-
-            likeButton.setImageResource(R.drawable.ic_favorite_red_24dp);
+            likeButton.setImageResource(R.drawable.ic_favorite_higlighted_24dp);
         }
 
-        @Override
-        protected void clear() {
-
-            recipeTitleTextView.setText("");
-            recipeImageView.setImageDrawable(null);
-
-        }
     }
 
     public interface Callback {

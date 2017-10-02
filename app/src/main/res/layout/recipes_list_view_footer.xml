@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="10dp">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/loading"
@@ -18,37 +16,38 @@
         <ProgressBar
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
-            android:layout_height="35dp"/>
+            android:layout_height="35dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
 
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
             fontPath="fonts/OpenSans-SemiBold.ttf"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="@string/loading"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp"
-            tools:ignore="MissingPrefix,RtlHardcoded"/>
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
     </LinearLayout>
 
-    <com.joanzapata.iconify.widget.IconTextView
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/retry_button"
-        fontPath="fonts/OpenSans-SemiBold.ttf"
+        fontPath="fonts/NeologyDecoW01-Medium.ttf"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="35dp"
         android:layout_gravity="center"
-        android:background="@drawable/curved_black_border"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/curved_solid"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center"
-        android:paddingBottom="5dp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:paddingTop="5dp"
-        android:text="{md-error 25sp}    RETRY"
-        android:textColor="@android:color/black"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:text="RETRY"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
         android:visibility="gone"
-        tools:ignore="HardcodedText"/>
+        tools:ignore="HardcodedText" />
 </FrameLayout>

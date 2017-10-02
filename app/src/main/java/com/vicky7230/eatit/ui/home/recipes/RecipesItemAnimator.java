@@ -81,7 +81,7 @@ public class RecipesItemAnimator extends DefaultItemAnimator {
         rotation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 if (valueAnimator.getCurrentPlayTime() >= 500) {
-                    holder.likeButton.setImageResource(R.drawable.ic_favorite_red_24dp);
+                    holder.likeButton.setImageResource(R.drawable.ic_favorite_higlighted_24dp);
                 }
             }
         });

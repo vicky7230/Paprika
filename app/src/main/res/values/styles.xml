@@ -1,9 +1,9 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/color_primary</item>
+        <item name="colorPrimaryDark">@color/color_primary_dark</item>
+        <item name="colorAccent">@color/color_accent</item>
     </style>
 
     <style name="DialogTheme">
@@ -12,6 +12,12 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowBackground">@drawable/splash_activity_background</item>
+    </style>
+
+    <style name="BottomNavigation">
+        <item name="android:background">@android:color/white</item>
+        <item name="itemBackground">@drawable/bottom_navigation_view_item_bg</item>
+        <item name="itemIconTint">@color/navigation_bar_icon_color</item>
     </style>
 </resources>

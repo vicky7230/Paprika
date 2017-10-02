@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/recipes"
+        android:title=""
+        android:icon="@drawable/ic_recipes_24dp"/>
+    <item
+        android:id="@+id/imagga"
+        android:title=""
+        android:icon="@drawable/ic_camera_24dp"/>
+    <item
+        android:id="@+id/likes"
+        android:title=""
+        android:icon="@drawable/ic_likes_24dp"/>
+    <item
+        android:id="@+id/settings"
+        android:title=""
+        android:icon="@drawable/ic_settings_24dp"/>
+</menu>

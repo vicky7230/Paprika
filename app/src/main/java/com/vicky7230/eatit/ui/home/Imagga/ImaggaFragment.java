@@ -15,6 +15,8 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.AppCompatButton;
+import android.support.v7.widget.AppCompatImageView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,7 @@ public class ImaggaFragment extends BaseFragment implements ImaggaMvpView {
     ImaggaPresenter<ImaggaMvpView> presenter;
 
     @BindView(R.id.camera_button)
-    IconTextView cameraButton;
+    AppCompatButton cameraButton;
 
     String mCurrentPhotoPath;
 

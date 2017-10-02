@@ -1,13 +1,15 @@
 package com.vicky7230.eatit.ui.home;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.View;
+import android.view.MenuItem;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.ui.base.BaseActivity;
+import com.vicky7230.eatit.utils.BottomNavigationViewHelper;
 
 import javax.inject.Inject;
 
@@ -29,28 +31,8 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
     @BindView(R.id.view_pager)
     ViewPager viewPager;
-    @BindView(R.id.tab_layout)
-    TabLayout tabLayout;
-
-    private final int[] TAB_ICONS_UNSELECTED = {
-            R.drawable.ic_recipes_unselected_24dp,
-            R.drawable.ic_camera_unselected_24dp,
-            R.drawable.ic_likes_unselected_24dp,
-            R.drawable.ic_settings_unselected_24dp
-    };
-    private final int[] TAB_ICONS_SELECTED = {
-            R.drawable.ic_recipes_selected_24dp,
-            R.drawable.ic_camera_selected_24dp,
-            R.drawable.ic_likes_selected_24dp,
-            R.drawable.ic_settings_selected_24dp
-    };
-
-    private final int[] TAB_INDICATORS = {
-            R.id.tab_indicator_1,
-            R.id.tab_indicator_2,
-            R.id.tab_indicator_3,
-            R.id.tab_indicator_4
-    };
+    @BindView(R.id.bottom_navigation_view)
+    BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +46,33 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
     private void init() {
 
+        BottomNavigationViewHelper.disableShiftMode(bottomNavigationView);
+
         viewPager.setOffscreenPageLimit(4);
         viewPager.setAdapter(viewPagerAdapter);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.recipes:
+                        viewPager.setCurrentItem(0, true);
+                        return true;
+                    case R.id.imagga:
+                        viewPager.setCurrentItem(1, true);
+                        return true;
+                    case R.id.likes:
+                        viewPager.setCurrentItem(2, true);
+                        return true;
+                    case R.id.settings:
+                        viewPager.setCurrentItem(3, true);
+                        return true;
+                }
+                return false;
+            }
+        });
+
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -74,17 +81,7 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
             @Override
             public void onPageSelected(int position) {
-                for (int i = 0; i < tabLayout.getTabCount(); ++i) {
-                    tabLayout.getTabAt(i).setIcon(
-                            i != position ?
-                                    TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
-                    );
-
-                    if (i == position)
-                        findViewById(TAB_INDICATORS[i]).setVisibility(View.VISIBLE);
-                    else
-                        findViewById(TAB_INDICATORS[i]).setVisibility(View.GONE);
-                }
+                bottomNavigationView.getMenu().getItem(position).setChecked(true);
             }
 
             @Override
@@ -92,19 +89,6 @@ public class HomeActivity extends BaseActivity implements HomeMvpView, HasSuppor
 
             }
         });
-
-        tabLayout.setupWithViewPager(viewPager);
-        for (int i = 0; i < tabLayout.getTabCount(); ++i) {
-            tabLayout.getTabAt(i).setIcon(
-                    i != viewPager.getCurrentItem() ?
-                            TAB_ICONS_UNSELECTED[i] : TAB_ICONS_SELECTED[i]
-            );
-
-            if (i == viewPager.getCurrentItem())
-                findViewById(TAB_INDICATORS[i]).setVisibility(View.VISIBLE);
-            else
-                findViewById(TAB_INDICATORS[i]).setVisibility(View.GONE);
-        }
     }
 
     @Override

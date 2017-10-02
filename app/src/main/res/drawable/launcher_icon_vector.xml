@@ -7,21 +7,21 @@
     <path
         android:name="path"
         android:pathData="M 35.24 0 C 32.084 0.642 29.583 1.965 27.809 3.992 C 26.425 5.573 25.708 7.322 25.339 8.862 C 26.501 8.813 27.668 8.803 28.821 8.802 C 29.121 7.929 29.587 7.015 30.314 6.184 C 31.481 4.85 33.143 3.922 35.265 3.394 C 35.292 2.261 35.306 1.117 35.24 0 Z"
-        android:fillColor="#6a3311"
+        android:fillColor="@color/brown_color"
         android:strokeWidth="1"/>
     <path
         android:name="path_1"
         android:pathData="M 26 52 C 19.95 52 15 47.05 15 41 L 15 19 C 15 12.95 19.95 8 26 8 C 32.05 8 37 12.95 37 19 L 37 41 C 37 47.05 32.05 52 26 52 Z"
-        android:fillColor="#a4e869"
+        android:fillColor="@color/icon_color"
         android:strokeWidth="1"/>
     <path
         android:name="path_2"
         android:pathData="M 39 8 C 36.57 8 34.326 8.808 32.5 10.156 C 35.22 12.163 37 15.38 37 19 L 37 41 C 37 44.62 35.22 47.837 32.5 49.844 C 34.326 51.192 36.57 52 39 52 C 45.05 52 48 47.05 48 41 L 50 19 C 50 12.95 45.05 8 39 8 Z"
-        android:fillColor="#e3e82a"
+        android:fillColor="@color/like_color"
         android:strokeWidth="1"/>
     <path
         android:name="path_3"
         android:pathData="M 13 8 C 15.43 8 17.674 8.808 19.5 10.156 C 16.78 12.163 15 15.38 15 19 L 15 41 C 15 44.62 16.78 47.837 19.5 49.844 C 17.674 51.192 15.43 52 13 52 C 6.95 52 4 47.05 4 41 L 2 19 C 2 12.95 6.95 8 13 8 Z"
-        android:fillColor="#88c057"
+        android:fillColor="@color/color_primary"
         android:strokeWidth="1"/>
 </vector>

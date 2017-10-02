@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.util.DiffUtil;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,11 +14,9 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.joanzapata.iconify.widget.IconTextView;
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.utils.GlideApp;
@@ -186,8 +185,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (recipe.getSourceUrl() != null) {
             CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                     .setShowTitle(true)
-                    .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
-                    .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.colorPrimaryDark))
+                    .setToolbarColor(ContextCompat.getColor(context, R.color.color_primary))
+                    .setSecondaryToolbarColor(ContextCompat.getColor(context, R.color.color_primary_dark))
                     .addDefaultShareMenuItem()
                     .build();
             customTabsIntent.launchUrl(context, Uri.parse(recipe.getSourceUrl()));
@@ -227,7 +226,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         if (holder instanceof RecipeViewHolder) {
             ((RecipeViewHolder) holder).recipeTitleTextView.setText("");
             ((RecipeViewHolder) holder).recipeImageView.setImageDrawable(null);
-            ((RecipeViewHolder) holder).likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+            ((RecipeViewHolder) holder).likeButton.setImageResource(R.drawable.ic_favorite_border_24dp);
         }
     }
 
@@ -278,9 +277,9 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         .into(recipeImageView);
 
             if (recipe.getLiked()) {
-                likeButton.setImageResource(R.drawable.ic_favorite_red_24dp);
+                likeButton.setImageResource(R.drawable.ic_favorite_higlighted_24dp);
             } else {
-                likeButton.setImageResource(R.drawable.ic_favorite_border_black_24dp);
+                likeButton.setImageResource(R.drawable.ic_favorite_border_24dp);
             }
         }
     }
@@ -290,7 +289,7 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         @BindView(R.id.loading)
         LinearLayout loading;
         @BindView(R.id.retry_button)
-        IconTextView retryButton;
+        AppCompatButton retryButton;
 
         public LoadingMoreViewHolder(View itemView) {
             super(itemView);

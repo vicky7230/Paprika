@@ -112,8 +112,8 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     if (recipe.getSourceUrl() != null) {
                         CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                                 .setShowTitle(true)
-                                .setToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.colorPrimary))
-                                .setSecondaryToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.colorPrimaryDark))
+                                .setToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.color_primary))
+                                .setSecondaryToolbarColor(ContextCompat.getColor(recipeViewHolder.itemView.getContext(), R.color.color_primary_dark))
                                 .addDefaultShareMenuItem()
                                 .build();
                         customTabsIntent.launchUrl(recipeViewHolder.itemView.getContext(), Uri.parse(recipe.getSourceUrl()));

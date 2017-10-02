@@ -20,7 +20,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:textColor="@android:color/black"
-            app:srcCompat="@drawable/ic_recipe_black_24dp" />
+            app:srcCompat="@drawable/ic_recipe_24dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
