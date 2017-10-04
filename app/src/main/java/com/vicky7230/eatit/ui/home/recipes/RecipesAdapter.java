@@ -46,6 +46,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         void onShareClick(String sourceUrl);
 
         void onIngredientsClick(String recipeId);
+
+        void onSingleClick(Recipe recipe);
     }
 
     private int tapCount = 0;
@@ -175,14 +177,8 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return recipeViewHolder;
     }
 
-    private void onDoubleClick(int position, Recipe recipe) {
-        notifyItemChanged(position, ACTION_LIKE_IMAGE_DOUBLE_CLICKED);
-        callback.onLikeRecipeClick(position);
-        recipe.setLiked(true);
-    }
-
     private void onSingleClick(Recipe recipe, Context context) {
-        if (recipe.getSourceUrl() != null) {
+        /*if (recipe.getSourceUrl() != null) {
             CustomTabsIntent customTabsIntent = new CustomTabsIntent.Builder()
                     .setShowTitle(true)
                     .setToolbarColor(ContextCompat.getColor(context, R.color.color_primary))
@@ -190,7 +186,15 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     .addDefaultShareMenuItem()
                     .build();
             customTabsIntent.launchUrl(context, Uri.parse(recipe.getSourceUrl()));
-        }
+        }*/
+
+        callback.onSingleClick(recipe);
+    }
+
+    private void onDoubleClick(int position, Recipe recipe) {
+        notifyItemChanged(position, ACTION_LIKE_IMAGE_DOUBLE_CLICKED);
+        callback.onLikeRecipeClick(position);
+        recipe.setLiked(true);
     }
 
     private RecyclerView.ViewHolder createLoadingMoreViewHolder(ViewGroup parent) {

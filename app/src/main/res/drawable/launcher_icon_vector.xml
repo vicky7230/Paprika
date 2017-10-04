@@ -17,7 +17,7 @@
     <path
         android:name="path_2"
         android:pathData="M 39 8 C 36.57 8 34.326 8.808 32.5 10.156 C 35.22 12.163 37 15.38 37 19 L 37 41 C 37 44.62 35.22 47.837 32.5 49.844 C 34.326 51.192 36.57 52 39 52 C 45.05 52 48 47.05 48 41 L 50 19 C 50 12.95 45.05 8 39 8 Z"
-        android:fillColor="@color/like_color"
+        android:fillColor="@color/violet_color"
         android:strokeWidth="1"/>
     <path
         android:name="path_3"

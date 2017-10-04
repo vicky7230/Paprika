@@ -14,4 +14,6 @@
     <string name="camera_hint">Don\'t know what to cook? Take a picture of an item and see the magic.</string>
     <string name="retry">RETRY</string>
     <string name="ingredients">Ingredients</string>
+    <string name="ingredients_upper_case">INGREDIENTS</string>
+    <string name="directions">DIRECTIONS</string>
 </resources>

@@ -5,7 +5,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -14,12 +18,14 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.ui.base.BaseFragment;
 import com.vicky7230.eatit.ui.search.SearchActivity;
+import com.vicky7230.eatit.utils.GlideApp;
 
 import java.util.List;
 
@@ -29,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import dagger.android.support.AndroidSupportInjection;
+
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
 public class RecipesFragment extends BaseFragment implements RecipesMvpView, RecipesAdapter.Callback {
 
@@ -43,9 +51,20 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     RecyclerView recipesRecyclerView;
     @BindView(R.id.fab)
     FloatingActionButton floatingActionButton;
+    @BindView(R.id.bottom_sheet)
+    RelativeLayout bottomSheetViewGroup;
+    @BindView(R.id.arrow_down)
+    AppCompatImageView arrowDownImageView;
+    @BindView(R.id.recipe_title_bottom_sheet)
+    AppCompatTextView recipeTitleBottomSheet;
+    @BindView(R.id.recipe_image_bottom_sheet)
+    AppCompatImageView recipeImageViewBottomSheet;
+    @BindView(R.id.scrim)
+    View scrim;
 
     private boolean isLoading = false;
     private boolean isScrollEnabled = false;
+    private BottomSheetBehavior bottomSheetBehavior;
 
     public static RecipesFragment newInstance() {
         Bundle args = new Bundle();
@@ -71,6 +90,27 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
 
     @Override
     protected void setUp(View view) {
+
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheetViewGroup);
+        hideBottomSheet();
+        bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+            @Override
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+                switch (newState) {
+                    case BottomSheetBehavior.STATE_DRAGGING:
+                        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        break;
+                    case BottomSheetBehavior.STATE_HIDDEN:
+                        break;
+                    case BottomSheetBehavior.STATE_EXPANDED:
+                        break;
+                }
+            }
+
+            @Override
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+            }
+        });
 
         recipesRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         recipesRecyclerView.setItemAnimator(new RecipesItemAnimator());
@@ -119,6 +159,25 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
 
         recipesAdapter.addItem(null);
         presenter.onViewPrepared();
+    }
+
+    @OnClick(R.id.arrow_down)
+    public void onArrowDownClick(View view) {
+        hideBottomSheet();
+    }
+
+    private void showBottomSheet() {
+        floatingActionButton.hide();
+        bottomSheetBehavior.setHideable(false);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        scrim.setVisibility(View.VISIBLE);
+    }
+
+    private void hideBottomSheet() {
+        floatingActionButton.show();
+        bottomSheetBehavior.setHideable(true);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+        scrim.setVisibility(View.GONE);
     }
 
     @Override
@@ -170,6 +229,21 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
     }
 
     @Override
+    public void onSingleClick(Recipe recipe) {
+        showBottomSheet();
+        if (recipe != null) {
+            if (recipe.getTitle() != null)
+                recipeTitleBottomSheet.setText(recipe.getTitle());
+            if (recipe.getImageUrl() != null)
+                GlideApp.with(this)
+                        .load(recipe.getImageUrl())
+                        .transition(withCrossFade())
+                        .centerCrop()
+                        .into(recipeImageViewBottomSheet);
+        }
+    }
+
+    @Override
     public void showIngredients(List<String> ingredients) {
 
         LayoutInflater layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -181,7 +255,7 @@ public class RecipesFragment extends BaseFragment implements RecipesMvpView, Rec
         Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(view);
-        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme; //style id
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogTheme;
         dialog.show();
     }
 
