@@ -26,11 +26,14 @@ public class LikesPresenter<V extends LikesMvpView> extends BasePresenter<V> imp
         RxBus.subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-
                 if (o instanceof LikesUpdatedEvent) {
                     loadLastInsertedFavouriteRecipe();
-                    Timber.d("count" );
                 }
+            }
+        }, new Consumer<Throwable>() {
+            @Override
+            public void accept(Throwable throwable) throws Exception {
+                getMvpView().showError(throwable.getMessage());
             }
         });
     }

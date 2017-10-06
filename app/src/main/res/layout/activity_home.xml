@@ -26,4 +26,15 @@
             android:layout_weight="1" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/scrim"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone" />
+
+    <include layout="@layout/bottom_sheets_main" />
+
 </android.support.design.widget.CoordinatorLayout>

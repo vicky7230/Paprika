@@ -13,8 +13,8 @@ public final class RxBus {
         // hidden constructor
     }
 
-    public static Disposable subscribe(@NonNull Consumer<Object> action) {
-        return publishSubject.subscribe(action);
+    public static Disposable subscribe(@NonNull Consumer<Object> action, Consumer<Throwable> throwableConsumer) {
+        return publishSubject.subscribe(action, throwableConsumer);
     }
 
     public static void publish(@NonNull Object message) {

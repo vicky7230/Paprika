@@ -3,27 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recipes_recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recipes_recycler_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layoutAnimation="@anim/grid_animation"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical" />
-
-        <View
-            android:id="@+id/scrim"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/scrim"
-            android:clickable="true"
-            android:focusable="true"
-            android:visibility="gone" />
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:layoutAnimation="@anim/grid_animation"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -36,7 +23,5 @@
         app:backgroundTint="@color/color_primary"
         app:fabSize="normal"
         app:srcCompat="@drawable/ic_search_white_48dp" />
-
-    <include layout="@layout/bottom_sheets_main" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -26,9 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class LikesFragment extends BaseFragment implements LikesMvpView, LikesAdapter.Callback {
 
     @Inject
