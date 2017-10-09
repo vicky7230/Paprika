@@ -62,6 +62,7 @@ dependencies {
     implementation "com.joanzapata.iconify:android-iconify-ionicons:$rootProject.iconifyVersion"
     implementation "com.joanzapata.iconify:android-iconify-material:$rootProject.iconifyVersion"
     implementation "org.greenrobot:greendao:$rootProject.greenDaoVersion"
+    implementation "com.github.franmontiel:AttributionPresenter:$rootProject.attributionPresenterVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.dagger2Version"

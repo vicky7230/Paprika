@@ -4,7 +4,6 @@
     <string name="search">Search for recipes</string>
     <string name="left_overs">Left Overs</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="share">Share</string>
     <string name="favourite">Favourite</string>
     <string name="remove">Remove</string>
@@ -16,4 +15,5 @@
     <string name="ingredients">Ingredients</string>
     <string name="ingredients_upper_case">INGREDIENTS</string>
     <string name="directions">DIRECTIONS</string>
+    <string name="open_source_libraries">Open Source Libraries</string>
 </resources>

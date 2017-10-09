@@ -6,6 +6,9 @@ import com.vicky7230.eatit.ui.home.likes.LikesFragment;
 import com.vicky7230.eatit.ui.home.likes.LikesModule;
 import com.vicky7230.eatit.ui.home.recipes.RecipesFragment;
 import com.vicky7230.eatit.ui.home.recipes.RecipesModule;
+import com.vicky7230.eatit.ui.home.settings.SettingsFragment;
+import com.vicky7230.eatit.ui.home.settings.SettingsModule;
+
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
@@ -20,4 +23,7 @@ public abstract class FragmentProvider {
 
     @ContributesAndroidInjector(modules = ImaggaModule.class)
     abstract ImaggaFragment provideImaggaFragmentFactory();
+
+    @ContributesAndroidInjector(modules = SettingsModule.class)
+    abstract SettingsFragment provideSettingsFragmentFactory();
 }

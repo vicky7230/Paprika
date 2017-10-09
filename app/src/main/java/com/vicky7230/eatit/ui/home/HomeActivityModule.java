@@ -1,5 +1,9 @@
 package com.vicky7230.eatit.ui.home;
 
+import android.content.Context;
+
+import com.vicky7230.eatit.di.HomeActivityContext;
+
 import dagger.Module;
 import dagger.Provides;
 
@@ -9,6 +13,12 @@ import dagger.Provides;
 
 @Module
 public class HomeActivityModule {
+
+    @Provides
+    @HomeActivityContext
+    Context provideHomeActivityContext(HomeActivity homeActivity){
+        return homeActivity;
+    }
 
     @Provides
     ViewPagerAdapter provideViewPagerAdapter(HomeActivity homeActivity) {
