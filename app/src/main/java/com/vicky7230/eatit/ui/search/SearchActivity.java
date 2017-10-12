@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.vicky7230.eatit.R;
 import com.vicky7230.eatit.data.network.model.recipes.Recipe;
 import com.vicky7230.eatit.ui.base.BaseActivity;
@@ -60,7 +61,8 @@ public class SearchActivity extends BaseActivity implements SearchMvpView {
     }
 
     private void init() {
-        presenter.instantSearch(searchEditText);
+//        presenter.instantSearch(searchEditText);
+        presenter.instantSearch(RxTextView.afterTextChangeEvents(searchEditText));
         searchRecyclerView.setLayoutManager(linearLayoutManager);
         searchRecyclerView.setAdapter(searchAdapter);
     }
