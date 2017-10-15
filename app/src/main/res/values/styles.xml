@@ -20,4 +20,9 @@
         <item name="itemBackground">@drawable/bottom_navigation_view_item_bg</item>
         <item name="itemIconTint">@color/navigation_bar_icon_color</item>
     </style>
+
+    <style name="AttributionName" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/pink_color</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
