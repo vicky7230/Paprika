@@ -19,6 +19,7 @@ allprojects {
         jcenter()
         mavenCentral()
         google()
+        maven {url "https://jitpack.io"}
     }
 }
 
@@ -49,6 +50,7 @@ ext {
     rxBindings = '2.0.0'
     butterKnifeVersion = '8.8.1'
     greenDaoVersion = '3.2.2'
+    attributionPresenterVersion = '1.0'
     timberVersion = '4.5.1'
     stethoVersion = '1.5.0'
 

@@ -2,6 +2,7 @@ package com.vicky7230.eatit.ui.search;
 
 import android.support.v7.widget.AppCompatEditText;
 
+import com.jakewharton.rxbinding2.InitialValueObservable;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewAfterTextChangeEvent;
 import com.vicky7230.eatit.data.DataManager;
@@ -33,9 +34,9 @@ public class SearchPresenter<V extends SearchMvpView> extends BasePresenter<V> i
     }
 
     @Override
-    public void instantSearch(AppCompatEditText appCompatEditText) {
+    public void instantSearch(InitialValueObservable<TextViewAfterTextChangeEvent> observable) {
 
-        getCompositeDisposable().add(RxTextView.afterTextChangeEvents(appCompatEditText)
+        getCompositeDisposable().add((observable)
                 .debounce(QUERY_UPDATE_DELAY_MILLIS, TimeUnit.MILLISECONDS)
                 .observeOn(Schedulers.io())
                 .filter(new Predicate<TextViewAfterTextChangeEvent>() {
