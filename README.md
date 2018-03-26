@@ -8,9 +8,9 @@
 #### This repository implements MVP architecture using Dagger2, GreenDao, RxJava and Retrofit2. 
 
 <p align="center">
-  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/1f.png" width="220">
-  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/2f.png" width="220">
-  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/3f.png" width="220">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/1f.png" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/2f.png" width="250">
+  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/3f.png" width="250">
 </p>
 
 #### Beautiful animations using RecyclerView ItemAnimator
