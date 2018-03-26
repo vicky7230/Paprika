@@ -18,7 +18,6 @@
 
 <p align="center">
   <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/4.gif" width="250">
-  <img src="https://github.com/vicky7230/Paprika/blob/master/graphics/5.gif" width="250">
 </p>
 <br>
 
